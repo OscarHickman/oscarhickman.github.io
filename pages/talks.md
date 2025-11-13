@@ -4,6 +4,8 @@ display: ''
 art: plum
 ---
 
+<!-- markdownlint-disable MD033 -->
+
 <SubNav />
 
 <div pt-5 />
@@ -58,6 +60,29 @@ art: plum
 </details>
 -->
 
-<h1 important="mb--4 mt-15">Talks</h1>
+## Talks
 
+No public talks yet — early days. This page will list future seminar and conference presentations on machine learning for cosmology (e.g. simulation-based inference, graph neural networks for large-scale structure, generative models for mock surveys).
+
+When you give a talk, add an entry to `data/talks.ts` with:
+
+```text
+{
+  title: 'Descriptive Title',
+  description: 'Short abstract or focus',
+  presentations: [
+    {
+      date: '2025-11-13',
+      location: 'Durham, UK',
+      conference: 'ICC Internal Seminar',
+      pdf: 'https://example.com/slides.pdf',
+      recording: 'https://example.com/video',
+    },
+  ],
+}
+```
+
+The component below will auto-render once entries exist.
+
+<!-- ListTalks component will render talks once data/talks.ts has entries -->
 <ListTalks />
