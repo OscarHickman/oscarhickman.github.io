@@ -38,10 +38,10 @@ jobs:
       - name: Build site
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
-          run: |
-            pnpm build
-            touch dist/.nojekyll
-            cp dist/index.html dist/404.html
+        run: |
+          pnpm build
+          touch dist/.nojekyll
+          cp dist/index.html dist/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
