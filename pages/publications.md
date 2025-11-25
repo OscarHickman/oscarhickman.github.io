@@ -3,9 +3,13 @@ title: Publications - Oscar Hickman
 description: Research outputs and preprints
 ---
 
+<!-- markdownlint-disable MD033 -->
+
 ## Publications & Preprints
 
 No publications yet — building foundations. This page will list preprints and papers on machine learning approaches to cosmology (e.g. simulation-based inference, graph neural networks for the cosmic web, generative models for survey augmentation).
+
+<ListPublications />
 
 ### How to add entries
 

@@ -1,17 +1,11 @@
 ---
-title: Sponsors - Anthony Fu
-display: Sponsors
-subtitle: Great thanks for all the Sponsors!
-description: Sponsors of Anthony Fu
+title: Support
+display: Support
+subtitle: This site is early; sponsorship features are disabled.
+description: Placeholder support page
 ---
 
 <!-- @layout-full-width -->
 
-<div class="prose pb5 mx-auto" slide-enter slide-enter-2>
-  <SponsorButtons />
-  <hr>
-</div>
-
-<div slide-enter slide-enter-4>
-  <SponsorsView />
-</div>
+Support and sponsorship components from the original theme are currently removed.
+If in future you wish to enable sponsorship, restore the components and provide the required data/assets.

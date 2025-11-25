@@ -21,9 +21,9 @@ If you're working on ML for cosmology, simulation-based inference, or differenti
 
 Find me on
 
-**Links:** [GitHub](https://github.com/OscarHickman) · [LinkedIn](https://www.linkedin.com/in/oscar-hickman)
+**Links:** [GitHub](https://github.com/OscarHickman) · [LinkedIn](https://www.linkedin.com/in/oscar-hickman) · [Publications](/publications)
 
-Or mail me at `oscar.hickman17@alumni.imperial.ac.uk`
+Or mail me at `oscar.hickman17@alumni.imperial.ac.uk` · CV (coming soon)
 
 (More links coming soon: Scholar / ORCID / arXiv)
 
