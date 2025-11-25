@@ -1,6 +1,7 @@
 ---
 title: Talks - Oscar Hickman
 display: ''
+description: Public talks
 art: plum
 ---
 

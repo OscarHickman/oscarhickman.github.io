@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { talks } from '../../data/talks'
-import { englishOnly, formatDate } from '../logics'
+import { formatDate } from '../logics'
 
 function getSlug(title: string) {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-')
@@ -18,7 +18,7 @@ function daysLeft(date: string) {
 
 <template>
   <template v-for="talk, idx of talks" :key="idx">
-    <div v-if="!englishOnly || !talk.lang || talk.lang === 'en'">
+    <div v-if="!talk.lang || talk.lang === 'en'">
       <div v-if="idx !== 0" pt4>
         <hr>
       </div>
@@ -45,7 +45,7 @@ function daysLeft(date: string) {
       </div>
       <div grid="~ cols-1 md:cols-[1fr_max-content] gap-4" pt6>
         <template v-for="p, idx2 in talk.presentations" :key="idx2">
-          <template v-if="!englishOnly || !p.lang || p.lang === 'en'">
+          <template v-if=" !p.lang || p.lang === 'en'">
             <div :lang="p.lang">
               <a :href="p.conferenceUrl" target="_blank" rel="noopener noreferrer">
                 {{ p.conference }}

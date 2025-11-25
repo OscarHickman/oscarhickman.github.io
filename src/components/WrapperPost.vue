@@ -12,10 +12,10 @@ const router = useRouter()
 const route = useRoute()
 const content = ref<HTMLDivElement>()
 
-const base = 'https://antfu.me'
-const tweetUrl = computed(() => `https://twitter.com/intent/tweet?text=${encodeURIComponent(`Reading @antfu7\'s ${base}${route.path}\n\nI think...`)}`)
-const elkUrl = computed(() => `https://elk.zone/intent/post?text=${encodeURIComponent(`Reading @antfu@m.webtoo.ls\'s ${base}${route.path}\n\nI think...`)}`)
-const blueskyUrl = computed(() => `https://bsky.app/intent/compose?text=${encodeURIComponent(`Reading @antfu.me ${base}${route.path}\n\nI think...`)}`)
+const base = 'https://oscarhickman.github.io'
+const tweetUrl = computed(() => `https://twitter.com/intent/tweet?text=${encodeURIComponent(`Reading @oscarhickman\'s ${base}${route.path}\n\nI think...`)}`)
+const elkUrl = computed(() => `https://elk.zone/intent/post?text=${encodeURIComponent(`Reading @oscarhickman\'s ${base}${route.path}\n\nI think...`)}`)
+const blueskyUrl = computed(() => `https://bsky.app/intent/compose?text=${encodeURIComponent(`Reading @oscarhickman ${base}${route.path}\n\nI think...`)}`)
 
 onMounted(() => {
   const navigate = () => {

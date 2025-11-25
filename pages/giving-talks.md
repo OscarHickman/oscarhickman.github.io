@@ -16,5 +16,4 @@ If you are organizing a frontend related conference or meetup, I'd be happy to g
 - I would expect my travel and accommodation to be covered.
 - For conferences outside of Schengen area, China, Singapore and Japan, I would need some assistance on the business visa application.
 
-You can reach me out at [talks@antfu.me](mailto:talks@antfu.me). Looking forward to it!
 -->
