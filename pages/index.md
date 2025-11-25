@@ -18,7 +18,3 @@ If you're working on ML for cosmology, simulation-based inference, or differenti
 **Email:** `oscar.hickman17@alumni.imperial.ac.uk`
 
 **Office:** OCW114, Department of Physics, Durham University, South Road, Durham, DH1 3LE, UK
-
----
-
-Theme originally forked from [antfu.me](https://antfu.me). Code MIT; content CC BY-NC-SA 4.0.
