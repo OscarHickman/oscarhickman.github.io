@@ -13,7 +13,11 @@ Outside research: mediocre triathlete, Cuban salsa dancer, and occasional sailor
 
 This site will grow as I add: publications, talks, project summaries, and exploratory notes on ML for cosmology. Early days — placeholders are here so future updates are easy.
 
-If you're working on ML for cosmology, simulation-based inference, or differentiable physics and want to chat/collaborate, feel free to reach out at `oscar.hickman17@alumni.imperial.ac.uk`
+If you're working on ML for cosmology, simulation-based inference, or differentiable physics and want to chat/collaborate, feel free to reach out:
+
+**Email:** `oscar.hickman17@alumni.imperial.ac.uk`
+
+**Office:** OCW114, Department of Physics, Durham University, South Road, Durham, DH1 3LE, UK
 
 ---
 
