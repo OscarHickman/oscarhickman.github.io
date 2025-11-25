@@ -13,19 +13,7 @@ Outside research: mediocre triathlete, Cuban salsa dancer, and occasional sailor
 
 This site will grow as I add: publications, talks, project summaries, and exploratory notes on ML for cosmology. Early days — placeholders are here so future updates are easy.
 
-If you're working on ML for cosmology, simulation-based inference, or differentiable physics and want to chat/collaborate, feel free to reach out.
-
-<!-- spacer removed to satisfy markdown lint; layout may adjust via CSS -->
-
----
-
-Find me on
-
-**Links:** [GitHub](https://github.com/OscarHickman) · [LinkedIn](https://www.linkedin.com/in/oscar-hickman) · [Papers](/papers) · [Talks](/talks) · [Projects](/projects)
-
-Or mail me at `oscar.hickman17@alumni.imperial.ac.uk` · CV (coming soon)
-
-(More links coming soon: Scholar / ORCID / arXiv)
+If you're working on ML for cosmology, simulation-based inference, or differentiable physics and want to chat/collaborate, feel free to reach out at `oscar.hickman17@alumni.imperial.ac.uk`
 
 ---
 
