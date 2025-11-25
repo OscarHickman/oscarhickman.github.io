@@ -47,9 +47,6 @@ const { y: scroll } = useWindowScroll()
         <a href="https://www.linkedin.com/in/oscar-hickman" target="_blank" title="LinkedIn" class="lt-md:hidden">
           <div i-ri-linkedin-line />
         </a>
-        <a href="/feed.xml" target="_blank" title="RSS" class="lt-md:hidden">
-          <div i-la-rss-square style="font-size:1.25rem; margin: 0 -0.125rem;" />
-        </a>
         <ToggleTheme />
       </div>
     </nav>
