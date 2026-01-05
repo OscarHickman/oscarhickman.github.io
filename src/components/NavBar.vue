@@ -47,7 +47,7 @@ const { y: scroll } = useWindowScroll()
         <a href="https://github.com/OscarHickman" target="_blank" title="GitHub" class="lt-md:hidden">
           <div i-uil-github-alt />
         </a>
-        <a href="https://www.linkedin.com/in/oscar-hickman" target="_blank" title="LinkedIn" class="lt-md:hidden">
+        <a href="https://www.linkedin.com/in/oscarhickman" target="_blank" title="LinkedIn" class="lt-md:hidden">
           <div i-ri-linkedin-line />
         </a>
         <ToggleTheme />
