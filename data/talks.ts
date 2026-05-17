@@ -24,7 +24,11 @@ export interface TalkCategory {
 
 export const talkCategories: TalkCategory[] = [
   {
-    name: 'Durham University',
+    name: 'External Talks',
+    talks: [],
+  },
+  {
+    name: 'Internal Talks',
     talks: [
       {
         title: 'Galaxy Clustering With Fewer Galaxies',
@@ -47,9 +51,5 @@ The reduction in computational cost is sufficient to make galaxy clustering a vi
         ],
       },
     ],
-  },
-  {
-    name: 'Invited Talks',
-    talks: [],
   },
 ]
