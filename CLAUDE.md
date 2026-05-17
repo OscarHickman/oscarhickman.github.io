@@ -103,21 +103,22 @@ oscarhickman.io/
 │   │   ├── main.css          # Global styles, CSS variables, animations
 │   │   ├── prose.css         # Markdown prose styling
 │   │   └── markdown.css      # Markdown-specific overrides
-│   └── data/                 # Shared composables (actually in root data/)
+│   └── data/                 # Data files (TypeScript)
+│       ├── projects.ts       # Export projectCategories with 18 GitHub projects
+│       ├── publications.ts   # Export publications[] array
+│       ├── talks.ts          # Export talks[] array
+│       ├── media.ts          # Anime/book/game/song tracking with state
+│       └── sponsors-circles.json # Sponsor data
 ├── pages/                    # File-based routing (Vue Router auto)
 │   ├── index.md              # Home page (hero section)
-│   ├── projects.md           # Portfolio of academic projects
+│   ├── projects.md           # Portfolio of 18 GitHub projects (6 categories)
 │   ├── publications.md       # Academic publications list
 │   ├── talks.md              # Talks and presentations
 │   ├── papers.md             # Papers & publications (alt page)
 │   ├── giving-talks.md       # Talk info/booking
-│   ├── notes.md              # Blog notes listing
+│   ├── notes.md              # Blog notes listing with SubNav
 │   ├── photos.md             # Photo gallery
 │   └── [...404].md           # 404 fallback
-├── data/                     # Content data files
-│   ├── publications.ts       # Export publications[] array
-│   ├── talks.ts              # Export talks[] array
-│   └── media.ts              # Anime/book/game/song tracking with state
 ├── photos/                   # Photo gallery
 │   ├── data.ts               # Dynamically loads .json metadata + images
 │   ├── p-YYYY-MM-DD-*.json   # Photo metadata (blurhash, caption, lang)
@@ -175,7 +176,34 @@ pnpm lint                # ESLint check
 
 ## Data Model & Content Types
 
-### Publications (data/publications.ts)
+### Projects (src/data/projects.ts)
+
+```typescript
+interface ProjectItem {
+  name: string
+  link: string
+  desc: string
+  icon: string
+  tags?: string[]
+}
+
+interface ProjectCategory {
+  name: string
+  projects: ProjectItem[]
+}
+
+export const projectCategories: ProjectCategory[] = [
+  { name: 'ML for Cosmology & Physics', projects: [/* ... */] },
+  { name: 'Software & Applications', projects: [/* ... */] },
+  { name: 'Hardware & Assembly', projects: [/* ... */] },
+  { name: 'Academic & Publications', projects: [/* ... */] },
+  { name: 'Web & Personal', projects: [/* ... */] },
+]
+```
+
+Populated with **18 GitHub projects** across 5 categories, each with name, GitHub link, description, Carbon icon, and optional tags (language, domain, type).
+
+### Publications (src/data/publications.ts)
 
 ```typescript
 interface Publication {
@@ -357,13 +385,18 @@ date: YYYY-MM-DD
 ## Content Organization
 
 - **Home**: intro + contact info
-- **Projects**: links to GitHub repos (academic + assembly)
-- **Publications**: will list arxiv/DOI papers (currently empty)
-- **Talks**: presentations with dates, locations, recordings (currently empty)
+- **Projects**: comprehensive portfolio of 18 GitHub projects across 5 categories:
+  - ML for Cosmology & Physics (6 projects)
+  - Software & Applications (5 projects)
+  - Hardware & Assembly (2 projects)
+  - Academic & Publications (3 projects)
+  - Web & Personal (2 projects)
+- **Publications**: will list arxiv/DOI papers (currently empty placeholder)
+- **Talks**: presentations with dates, locations, recordings (currently empty placeholder)
 - **Papers**: alt view for publications
 - **Giving Talks**: booking info (Cal.com embed)
-- **Notes**: blog-style personal thoughts
-- **Photos**: image gallery with metadata
+- **Notes**: blog-style personal thoughts with SubNav for categories
+- **Photos**: image gallery with metadata and blurhash lazy loading
 - **Media**: personal entertainment tracking (not public-facing)
 
 ## Context for AI Agents
@@ -381,10 +414,14 @@ date: YYYY-MM-DD
 
 ### Common Tasks
 
-- **Adding publications**: edit `data/publications.ts`, add to array
-- **Adding talks**: edit `data/talks.ts`, structure with date + conference
+- **Adding/updating projects**: edit `src/data/projects.ts`:
+  - Add project to appropriate `ProjectCategory`
+  - Include: name, GitHub link, description, icon (Iconify class), tags
+  - Projects auto-render via `ListProjects` component on `/projects` page
+  - Use Carbon icons (e.g., `i-carbon-chart-scatter`) for consistency
+- **Adding publications**: edit `src/data/publications.ts`, add to array (will populate automatically)
+- **Adding talks**: edit `src/data/talks.ts`, structure with date + conference (will populate automatically)
 - **Managing photos**: place `.jpg` in `photos/`, run `pnpm photos`, commit both `.jpg` and generated `.json`
-- **Updating projects**: edit `pages/projects.md` (data is inline)
 - **Creating interactive demo**: follow AsyncSyncQuantum pattern:
   - Create component in `src/components/` with `<script setup>` + reactive state
   - Import graphics library (Matter.js, Pixi, etc.) as needed
@@ -438,11 +475,12 @@ The build process regenerates OG images and all static output, so only source ne
 
 ### Future Expansion
 
-- [ ] Populate publications array with arxiv/DOI entries
-- [ ] Add talks with presentation metadata
-- [ ] Expand notes section with cosmology/ML insights
-- [ ] Enhance project descriptions
-- [ ] Add interactive demos (see AsyncSyncQuantum component pattern)
+- [x] **Projects section** — fully populated with 18 GitHub projects across 5 categories
+- [ ] Populate publications array with arxiv/DOI entries (add to `src/data/publications.ts`)
+- [ ] Add talks with presentation metadata (add to `src/data/talks.ts`)
+- [ ] Expand notes section with cosmology/ML insights (add blog posts to `pages/notes/`)
+- [ ] Add interactive demos beyond existing components (see AsyncSyncQuantum pattern for reference)
+- [ ] Enhance individual project READMEs on GitHub with more detail
 
 ---
 
