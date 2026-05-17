@@ -11,6 +11,9 @@
     "lint": "eslint .",
     "compress": "tsx scripts/img-compress-staged.ts",
     "photos": "tsx scripts/photos-manage.ts",
+    "photos:import": "tsx scripts/import-photos.ts",
+    "photos:cleanup": "tsx scripts/cleanup-duplicates.ts",
+    "photos:captions": "tsx scripts/manage-captions.ts",
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
@@ -67,6 +70,7 @@
     "feed": "catalog:dev",
     "fs-extra": "catalog:dev",
     "gray-matter": "catalog:build",
+    "heic-decode": "catalog:dev",
     "lint-staged": "catalog:dev",
     "markdown-it": "catalog:build",
     "markdown-it-anchor": "catalog:build",

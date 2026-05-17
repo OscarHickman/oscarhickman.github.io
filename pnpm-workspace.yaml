@@ -41,6 +41,7 @@ catalogs:
     fast-glob: ^3.3.3
     feed: ^5.1.0
     fs-extra: ^11.3.2
+    heic-decode: ^2.1.0
     lint-staged: ^16.2.5
     pathe: ^2.0.3
     pnpm: ^10.19.0

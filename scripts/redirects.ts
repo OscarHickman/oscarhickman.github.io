@@ -5,7 +5,7 @@ import { getStarsRankingUrl } from './stars-rank'
 const pages = 2
 
 async function run() {
-  const manual = await fs.readFile('_redirects', 'utf-8')
+  const manual = await fs.readFile('public/_redirects', 'utf-8')
   const gh = new Octokit({ auth: process.env.GITHUB_TOKEN! })
 
   const redirects: [string, string, number][] = []
