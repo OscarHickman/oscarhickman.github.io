@@ -30,13 +30,6 @@ export const projectCategories: ProjectCategory[] = [
         tags: ['Python', 'Simulation', 'Pipeline'],
       },
       {
-        name: 'Shark',
-        link: 'https://github.com/OscarHickman/shark',
-        desc: 'Flexible semi-analytic model of galaxy formation for cosmological simulations',
-        icon: 'i-carbon-model-builder',
-        tags: ['Python', 'Galaxy Formation', 'Modeling'],
-      },
-      {
         name: 'CMB Cosmology with Advanced Sampling',
         link: 'https://github.com/OscarHickman/cosmology-from-the-cmb-with-advanced-sampling-techniques',
         desc: 'Hamiltonian Monte Carlo and NUTS sampling for CMB cosmological parameter inference using TensorFlow Probability. Masters project.',
