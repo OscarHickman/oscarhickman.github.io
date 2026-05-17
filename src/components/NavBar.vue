@@ -11,7 +11,7 @@ const { y: scroll } = useWindowScroll()
 
 <template>
   <header class="header z-40">
-    <div class="home-button absolute xl:fixed m-5 flex items-center gap-2">
+    <div class="home-button absolute xl:fixed m-5 flex items-center gap-3">
       <RouterLink
         class="w-12 h-12 select-none outline-none"
         to="/"
@@ -27,6 +27,15 @@ const { y: scroll } = useWindowScroll()
       >
         Home
       </RouterLink>
+      <a
+        href="https://www.strava.com/athletes/36376289"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden sm:flex items-center justify-center w-8 h-8 op70 hover:op100 transition-opacity"
+        title="Strava"
+      >
+        <div i-ri-run-line class="text-lg" />
+      </a>
     </div>
     <button
       title="Scroll to top"
