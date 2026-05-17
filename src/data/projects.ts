@@ -48,7 +48,7 @@ export const projectCategories: ProjectCategory[] = [
         link: 'https://github.com/OscarHickman/SCOPE',
         desc: 'Research project on cosmological parameter estimation and inference',
         icon: 'i-carbon-telescope',
-        tags: ['Python'],
+        tags: ['Rust', 'Python'],
       },
       {
         name: 'Academic Physics Learning',
