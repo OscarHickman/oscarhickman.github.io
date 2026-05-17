@@ -118,6 +118,9 @@ catalogs:
     fs-extra:
       specifier: ^11.3.2
       version: 11.3.2
+    heic-decode:
+      specifier: ^2.1.0
+      version: 2.1.0
     lint-staged:
       specifier: ^16.2.5
       version: 16.2.5
@@ -403,7 +406,7 @@ importers:
         specifier: catalog:build
         version: 4.0.3
       heic-decode:
-        specifier: ^2.1.0
+        specifier: catalog:dev
         version: 2.1.0
       lint-staged:
         specifier: catalog:dev
