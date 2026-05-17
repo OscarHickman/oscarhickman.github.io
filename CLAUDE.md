@@ -326,13 +326,16 @@ date: YYYY-MM-DD
 
 **Photo Workflow:**
 
-1. Add `.jpg` image to `photos/` directory
-2. Run `pnpm photos` — automatically:
-   - Extracts EXIF metadata (date, camera, etc.)
-   - Generates blurhash for lazy-load placeholder
-   - Creates `.json` metadata file alongside image
-3. Commit both `.jpg` and generated `.json` metadata
-4. Photo appears in gallery automatically via glob import in `photos/data.ts`
+1. Drop new photos into `unprocessed_photos/` directory (supports JPG, PNG, HEIC).
+2. Run `pnpm photos:import` — automatically:
+   - Converts HEIC to JPG.
+   - Extracts EXIF metadata (date, location, camera).
+   - Performs **pixel-based deduplication** (removes visually identical files even with different names).
+   - Resizes and squares images (1440px max) with metadata.
+   - Generates blurhashes.
+   - **Deletes files** from `unprocessed_photos/` after success.
+3. Run `pnpm photos:captions` to interactively add captions (automatically opens the photo in your default viewer).
+4. Commit both `.jpg` and generated `.json` metadata.
 
 **Other image processing:**
 

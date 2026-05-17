@@ -55,8 +55,9 @@ This triggers `vite-ssg build`, runs custom scripts (OG image generation, font c
 ### Maintenance Scripts
 
 - **Linting:** `pnpm lint`
+- **Photo Import:** `pnpm photos:import` (Import from `unprocessed_photos/`, deduplicate via pixels, and auto-cleanup)
+- **Photo Captions:** `pnpm photos:captions` (Interactive tool with image preview)
 - **Image Compression:** `pnpm compress`
-- **Photo Management:** `pnpm photos`
 - **Redirects Generation:** `pnpm redirects`
 
 ## Development Conventions
@@ -65,4 +66,4 @@ This triggers `vite-ssg build`, runs custom scripts (OG image generation, font c
 - **Components:** Prefer functional and composable components. Use `unplugin-vue-components` for auto-importing.
 - **Icons:** Use the pattern `<i-collection-name />` to include icons from Iconify.
 - **Markdown:** Markdown files in `pages/` support frontmatter, which is used for metadata (title, description, image).
-- **Static Assets:** Large images should be processed via `scripts/img-compress.ts` before being committed or used.
+- **Static Assets:** New photos should be processed via `pnpm photos:import`.
