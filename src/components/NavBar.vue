@@ -27,15 +27,6 @@ const { y: scroll } = useWindowScroll()
       >
         Home
       </RouterLink>
-      <a
-        href="https://www.strava.com/athletes/36376289"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hidden sm:flex items-center justify-center w-8 h-8 op70 hover:op100 transition-opacity"
-        title="Strava"
-      >
-        <div i-ri-run-line class="text-lg" />
-      </a>
     </div>
     <button
       title="Scroll to top"
@@ -68,6 +59,9 @@ const { y: scroll } = useWindowScroll()
         </a>
         <a href="https://www.linkedin.com/in/oscarhickman" target="_blank" title="LinkedIn" class="lt-md:hidden">
           <div i-ri-linkedin-line />
+        </a>
+        <a href="https://www.strava.com/athletes/36376289" target="_blank" title="Strava" class="lt-md:hidden">
+          <div i-ri-run-line />
         </a>
         <ToggleTheme />
       </div>
