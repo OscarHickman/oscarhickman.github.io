@@ -1,8 +1,8 @@
 ---
 title: Talks - Oscar Hickman
-display: ''
-description: Public talks
+display: Talks
+description: Public talks and presentations
 art: plum
 ---
 
-Talks coming soon.
+<ListTalksByCategory />
