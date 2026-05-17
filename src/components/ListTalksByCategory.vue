@@ -20,7 +20,7 @@ function daysLeft(date: string) {
   <div class="prose m-auto">
     <template v-for="category, catIdx in talkCategories" :key="category.name">
       <div :id="getSlug(category.name)" :class="catIdx > 0 ? 'mt-16' : ''">
-        <h2 mb8>
+        <h2 mb8 pb4 border="b-2 hex-888" inline-block>
           {{ category.name }}
         </h2>
 

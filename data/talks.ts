@@ -24,11 +24,11 @@ export interface TalkCategory {
 
 export const talkCategories: TalkCategory[] = [
   {
-    name: 'External Talks',
+    name: 'External',
     talks: [],
   },
   {
-    name: 'Internal Talks',
+    name: 'Internal',
     talks: [
       {
         title: 'Galaxy Clustering With Fewer Galaxies',
