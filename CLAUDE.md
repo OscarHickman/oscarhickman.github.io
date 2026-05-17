@@ -1,3 +1,9 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+---
+
 # Oscar Hickman's Personal Website
 
 **Project**: oscarhickman.io
@@ -145,10 +151,10 @@ Components directory also contains:
 
 ```bash
 # Development
-pnpm dev                 # Start dev server (http://localhost:3333)
+pnpm dev                 # Start dev server (http://localhost:3333, hot reload enabled)
 
 # Production
-pnpm build               # Build static site (runs vite-ssg)
+pnpm build               # Pre-render all routes to static HTML via Vite-SSG, output to dist/
 pnpm preview             # Preview production build locally
 
 # Content & Utilities
@@ -160,6 +166,12 @@ pnpm lint                # ESLint check
 # Deployment
 # Netlify auto-deploys on push (builds with pnpm run build, publishes dist/)
 ```
+
+**Dev Server Notes:**
+
+- Hot module reload (HMR) for instant feedback on component/style changes
+- Sourcemaps enabled for debugging
+- Runs on `http://localhost:3333` with live updates
 
 ## Data Model & Content Types
 
@@ -262,7 +274,9 @@ date: YYYY-MM-DD
 
 ### Markdown to Vue
 
-- **unplugin-vue-markdown**: converts `.md` files to Vue components
+- **unplugin-vue-markdown**: converts `.md` files to Vue components with full Vue syntax support
+  - Embed components directly: `<MyComponent />` (auto-imported, no manual import needed)
+  - Can mix Markdown and Vue in the same file
 - **Frontmatter metadata** → route meta + page head
 - **Auto-generated OpenGraph images**: if no custom `.png` exists, generates from title using template SVG + Sharp
 - **Syntax highlighting**: Shiki with vitesse theme + twoslash support
@@ -270,16 +284,33 @@ date: YYYY-MM-DD
 
 ### Static Site Generation
 
-- **Vite-SSG**: pre-renders all routes to static HTML
-- **URL-based routing**: pages auto-discovered from `pages/` directory
-- **Markdown content**: becomes route files automatically
+- **Vite-SSG**: pre-renders all routes to static HTML during `pnpm build`
+  - Dev server runs internally to execute each page and generate static output
+  - No client-side routing overhead in final output
+- **File-based routing**: each `.md` in `pages/` becomes a route
+  - `pages/index.md` → `/`
+  - `pages/notes.md` → `/notes`
+  - `pages/notes/my-post.md` → `/notes/my-post`
+  - `pages/[...404].md` → fallback 404 handler
+- **Markdown content**: automatically becomes page components
 
 ### Image Processing
 
-1. **Photo compression**: `pnpm photos` CLI extracts EXIF, generates blurhash
-2. **OG image generation**: `scripts/og-template.svg` + Sharp render title as PNG
-3. **Sharp optimization**: `pnpm compress` optimizes staged images
-4. **Blurhash**: low-resolution placeholder hashes for photos
+**Photo Workflow:**
+
+1. Add `.jpg` image to `photos/` directory
+2. Run `pnpm photos` — automatically:
+   - Extracts EXIF metadata (date, camera, etc.)
+   - Generates blurhash for lazy-load placeholder
+   - Creates `.json` metadata file alongside image
+3. Commit both `.jpg` and generated `.json` metadata
+4. Photo appears in gallery automatically via glob import in `photos/data.ts`
+
+**Other image processing:**
+
+- **OG image generation**: `scripts/og-template.svg` + Sharp render title as PNG (auto-generated at build time if missing)
+- **Sharp optimization**: `pnpm compress` optimizes staged images (lossless compression, format conversion)
+- **Blurhash**: low-resolution placeholder hash strings for fade-in effect on photo load
 
 ### UI Polish
 
@@ -339,19 +370,45 @@ date: YYYY-MM-DD
 
 ### Development Workflow
 
-1. **Add page**: create `.md` file in `pages/`
-2. **Add content**: write Markdown with Vue `<script setup>` blocks
-3. **Add frontmatter**: `title`, `description`, `image`, `art` keys
-4. **Component reuse**: auto-imported from `src/components/`
-5. **Style**: use UnoCSS classes or scoped `<style>`
+1. **Add page**: create `.md` file in `pages/` (file structure maps to URLs automatically)
+2. **Add content**: write Markdown with Vue `<script setup>` blocks and embedded components
+3. **Add frontmatter**: `title`, `description`, `image`, `art` keys for metadata
+4. **Use components**: components from `src/components/` are auto-imported, just use `<ComponentName />`
+5. **Style**:
+   - **UnoCSS classes** for layout, spacing, utilities (default choice)
+   - **Scoped `<style>`** for component-specific styling or complex selectors
+   - **CSS variables** in `src/styles/main.css` for theme colors
 
 ### Common Tasks
 
 - **Adding publications**: edit `data/publications.ts`, add to array
 - **Adding talks**: edit `data/talks.ts`, structure with date + conference
-- **Managing photos**: use `pnpm photos` CLI to process images, EXIF → blurhash
+- **Managing photos**: place `.jpg` in `photos/`, run `pnpm photos`, commit both `.jpg` and generated `.json`
 - **Updating projects**: edit `pages/projects.md` (data is inline)
-- **Dark mode**: handled by `logics/index.ts`, View Transitions API
+- **Creating interactive demo**: follow AsyncSyncQuantum pattern:
+  - Create component in `src/components/` with `<script setup>` + reactive state
+  - Import graphics library (Matter.js, Pixi, etc.) as needed
+  - Handle canvas/DOM rendering and cleanup on unmount
+  - Embed in `.md` page as `<AsyncSyncQuantum />`
+- **Dark mode**: handled by `logics/index.ts` with View Transitions API for smooth toggle
+
+### Build Artifacts & Version Control
+
+**Commit to git:**
+
+- Source code: `src/`, `pages/`, `data/`, scripts
+- Photos: both `.jpg` image AND generated `.json` metadata
+- Config files: `vite.config.ts`, `tsconfig.json`, `package.json`, etc.
+
+**Generated (ignored):**
+
+- `dist/` — final static site output from `pnpm build`
+- `.output/` — Vite-SSG cache
+- `public/og/*.png` — auto-generated OpenGraph images (regenerated at build time)
+- `node_modules/` — dependencies
+- `.env.local` — local environment variables
+
+The build process regenerates OG images and all static output, so only source needs version control.
 
 ### Performance Optimizations
 
@@ -370,12 +427,14 @@ date: YYYY-MM-DD
 
 ### Common Pitfalls & Notes
 
-1. **Pages routing**: must be in `pages/` directory (auto-discovered)
-2. **Components**: auto-imported from `src/components/`, no manual imports needed
-3. **Frontmatter**: required for metadata (head tags, OG images)
-4. **Images**: photos need matching `.json` metadata for blurhash/captions
-5. **Icons**: use Iconify class names (e.g., `i-ri-menu-2-fill`)
-6. **Build output**: `dist/` is final static site, not for version control
+1. **Pages routing**: `.md` files must be in `pages/` directory to create routes (auto-discovered by Vite-SSG)
+2. **Markdown + Vue**: can embed components directly (`<MyComponent />`) — they auto-import, no manual import needed
+3. **Frontmatter**: required for route metadata (title, description for head tags, OG images)
+4. **Photos**: must run `pnpm photos` after adding `.jpg` to generate `.json` metadata (blurhash, captions)
+5. **Icons**: use Iconify class names (`i-ri-menu-2-fill`), not img tags
+6. **Build output**: `dist/` is generated static site, not for version control — gitignore it
+7. **OG images**: `public/og/` directory is auto-generated at build time, don't commit — only commit custom `.png` overrides to `public/`
+8. **Styling**: use UnoCSS for layout/utilities, scoped `<style>` for component-specific CSS
 
 ### Future Expansion
 

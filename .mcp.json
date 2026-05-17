@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "desktop-control": {
+      "command": "node",
+      "args": ["/home/bmxz31/.mcp-servers/desktop-control/build/index.js"],
+      "env": {
+        "DISPLAY": ":0",
+        "XAUTHORITY": "/home/bmxz31/.Xauthority"
+      }
+    }
+  }
+}

@@ -33,7 +33,7 @@ function slug(name: string) {
         target="_blank"
         :title="item.name"
       >
-        <div v-if="item.icon" class="pt-2 pr-5" />
+        <div v-if="item.icon" :class="item.icon" class="pt-2 pr-5 text-2xl" />
         <div class="flex-auto">
           <div class="text-normal">{{ item.name }}</div>
           <div class="desc text-sm opacity-50 font-normal" v-html="item.desc" />
