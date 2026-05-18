@@ -38,6 +38,8 @@ pnpm dev
 
 ### Production Build
 
+GitHub build: [Build and Deploy](https://github.com/OscarHickman/OscarHickman.io/actions/workflows/build.yml)
+
 ```bash
 pnpm build
 ```
