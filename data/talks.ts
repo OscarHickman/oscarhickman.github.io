@@ -2,6 +2,7 @@ export interface TalkPresentation {
   date: string
   endDate?: string
   time?: string
+  institution?: string
   location?: string
   conference: string
   conferenceUrl?: string
@@ -14,6 +15,7 @@ export interface TalkPresentation {
 
 export interface Talk {
   title: string
+  series?: string
   description?: string
   presentations: TalkPresentation[]
 }
@@ -33,7 +35,6 @@ export const talkCategories: TalkCategory[] = [
     talks: [
       {
         title: 'Galaxy Clustering With Fewer Galaxies',
-        description: 'How to recover galaxy clustering statistics from sparsely sampled catalogues, enabling efficient parameter calibration for galaxy formation models.',
         presentations: [
           {
             date: '2026-05-08',
@@ -64,7 +65,8 @@ The reduction in computational cost is sufficient to make galaxy clustering a vi
             endDate: '2026-09-11',
             conference: 'Building Galaxies',
             conferenceUrl: 'https://wwwmpa.mpa-garching.mpg.de/conf/bugs2026/',
-            location: 'Heidelberg, Germany',
+            institution: 'University of Heidelberg',
+            location: 'Heidelberg University, Grabengasse 1, 69117 Heidelberg, Germany',
           },
         ],
       },
@@ -76,7 +78,8 @@ The reduction in computational cost is sufficient to make galaxy clustering a vi
             endDate: '2026-07-16',
             conference: 'DESI Durham 2026',
             conferenceUrl: 'https://pay.durham.ac.uk/event-durham/desi-summer-2026-collaboration-meeting',
-            location: 'Durham University, Durham, UK',
+            institution: 'Durham University',
+            location: 'The Ogden Centre for Fundamental Physics West, South Rd, Durham DH1 3LE, UK',
           },
         ],
       },
@@ -88,7 +91,8 @@ The reduction in computational cost is sufficient to make galaxy clustering a vi
             endDate: '2026-06-26',
             conference: 'SBI GALEV 2026',
             conferenceUrl: 'https://sbi-galev.github.io/2026/#dates',
-            location: 'Kavli Institute for Cosmology, Cambridge, UK',
+            institution: 'University of Cambridge',
+            location: 'Kavli Institute for Cosmology, Madingley Rd, Cambridge CB3 0HA, UK',
           },
         ],
       },
@@ -99,7 +103,8 @@ The reduction in computational cost is sufficient to make galaxy clustering a vi
             date: '2026-02-23',
             endDate: '2026-02-27',
             conference: 'Kitt Peak National Observatory',
-            location: 'Arizona, USA',
+            institution: 'Kitt Peak National Observatory',
+            location: 'Kitt Peak National Observatory, Tohono O\'odham Nation, AZ 85634, USA',
           },
         ],
       },
@@ -111,7 +116,8 @@ The reduction in computational cost is sufficient to make galaxy clustering a vi
             endDate: '2026-01-09',
             conference: 'DEX 2026',
             conferenceUrl: 'https://indico.ph.ed.ac.uk/event/389/',
-            location: 'University of Edinburgh, Edinburgh, UK',
+            institution: 'University of Edinburgh',
+            location: 'James Clerk Maxwell Building (JCMB), Peter Guthrie Tait Rd, Edinburgh EH9 3FD, UK',
           },
         ],
       },

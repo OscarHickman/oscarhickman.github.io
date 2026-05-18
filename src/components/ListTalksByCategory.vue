@@ -51,31 +51,33 @@ function formatRange(start: string, end?: string) {
 
         <template v-for="talk, talkIdx in category.talks" :key="talk.title">
           <div v-if="!talk.lang || talk.lang === 'en'" :class="talkIdx > 0 ? 'mt-12 pt-12 border-t border-hex-8882' : ''">
-            <h3 :id="`${getSlug(category.name)}-${getSlug(talk.title)}`" tabindex="-1" mb4 :lang="talk.lang">
-              {{ talk.title }}
-              <span v-if="talk.presentations.some(p => isFuture(p.date))" ml2 px2 py0.5 text-xs font-bold uppercase tracking-wider bg-hex-8883 text-hex-888 rounded>Upcoming</span>
-            </h3>
-
-            <div v-if="talk.description" op75 mb6 :lang="talk.lang">
-              {{ talk.description }}
-            </div>
-
             <template v-for="p, presIdx in talk.presentations" :key="presIdx">
               <template v-if="!p.lang || p.lang === 'en'">
                 <div :lang="p.lang" mb8>
-                  <!-- Conference & Time -->
-                  <div flex="~ gap-2 items-baseline" mb2>
+                  <!-- Combined Title: Conference + Talk Title (Normal Sections) -->
+                  <h3 v-if="category.name !== 'Conferences and Fieldwork'" :id="`${getSlug(category.name)}-${getSlug(talk.title)}`" tabindex="-1" mb2 :lang="talk.lang" text-xl>
                     <a v-if="p.conferenceUrl" :href="p.conferenceUrl" target="_blank" rel="noopener noreferrer" hover:underline>
-                      <span font-semibold text-lg>{{ p.conference }}</span>
+                      <span font-semibold>{{ p.conference }}:</span>
                     </a>
-                    <span v-else font-semibold text-lg>{{ p.conference }}</span>
-                    <span v-if="p.time" text-sm op70>{{ p.time }}</span>
-                  </div>
+                    <span v-else font-semibold>{{ p.conference }}:</span>
+                    <span ml2 op80 font-normal>{{ talk.title }}</span>
+                    <span v-if="isFuture(p.date)" ml2 px2 py0.5 text-xs font-bold uppercase tracking-wider bg-hex-8883 text-hex-888 rounded>Upcoming</span>
+                  </h3>
 
-                  <!-- Date & Location -->
-                  <div text-sm op70 space-y-1>
-                    <div v-if="p.date">
-                      {{ formatRange(p.date, p.endDate) }}
+                  <!-- Single Title (Fieldwork Section) -->
+                  <h3 v-else :id="`${getSlug(category.name)}-${getSlug(talk.title)}`" tabindex="-1" mb2 :lang="talk.lang" text-xl font-semibold>
+                    {{ talk.title }}
+                    <span v-if="isFuture(p.date)" ml2 px2 py0.5 text-xs font-bold uppercase tracking-wider bg-hex-8883 text-hex-888 rounded>Upcoming</span>
+                  </h3>
+
+                  <!-- Date, Time, Institution & Location -->
+                  <div text-sm op70 space-y-1 mb6>
+                    <div flex="~ gap-2 items-baseline">
+                      <span v-if="p.date">{{ formatRange(p.date, p.endDate) }}</span>
+                      <span v-if="p.time" text-xs op70>at {{ p.time }}</span>
+                    </div>
+                    <div v-if="p.institution" font-semibold>
+                      {{ p.institution }}
                     </div>
                     <div v-if="p.location">
                       {{ p.location }}
@@ -83,6 +85,10 @@ function formatRange(start: string, end?: string) {
                     <div v-if="p.room" text-xs op50 mt2>
                       {{ p.room }}
                     </div>
+                  </div>
+
+                  <div v-if="talk.description" op75 mb6 :lang="talk.lang">
+                    {{ talk.description }}
                   </div>
 
                   <!-- Abstract -->
