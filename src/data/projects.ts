@@ -31,10 +31,10 @@ export const projectCategories: ProjectCategory[] = [
       },
       {
         name: 'CMB Cosmology with Advanced Sampling',
-        link: 'https://github.com/OscarHickman/cosmology-from-the-cmb-with-advanced-sampling-techniques',
-        desc: 'Hamiltonian Monte Carlo and NUTS sampling for CMB cosmological parameter inference using TensorFlow Probability. Masters project.',
+        link: 'https://github.com/OscarHickman/CMB_Advanced_Sampling',
+        desc: 'Accurate CMB power spectrum sampling using TensorFlow Probability and advanced MCMC techniques (HMC & NUTS). Masters project.',
         icon: 'i-carbon-wave-direction',
-        tags: ['Python', 'Jupyter'],
+        tags: ['Python', 'Rust', 'TensorFlow Probability'],
       },
       {
         name: 'Photon BEC Phase Characterisation',
