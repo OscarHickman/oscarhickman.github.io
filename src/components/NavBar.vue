@@ -20,13 +20,6 @@ const { y: scroll } = useWindowScroll()
       >
         <Logo />
       </RouterLink>
-      <RouterLink
-        to="/"
-        class="hidden sm:block select-none text-sm font-medium op70 hover:op100 transition-opacity"
-        title="Go home"
-      >
-        Home
-      </RouterLink>
     </div>
     <button
       title="Scroll to top"

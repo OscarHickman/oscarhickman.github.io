@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><style>.a{fill:#333}@media (prefers-color-scheme:dark){.a{fill:#eee}}</style><g class="a"><circle cx="30" cy="50" r="20" fill="none" stroke="currentColor" stroke-width="5"/><path d="M68 25L68 75M68 47C68 41 72 37 77 37C82 37 86 41 86 49C86 57 86 75 86 75" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <style>
+    .mark { fill: none; stroke: #333; stroke-width: 16; stroke-linecap: round; stroke-linejoin: round; }
+    @media (prefers-color-scheme: dark) { .mark { stroke: #eee; } }
+  </style>
+  <!-- Extra Bold Uppercase OH Monogram for Maximum Tab Legibility -->
+  <circle class="mark" cx="30" cy="50" r="22" />
+  <path class="mark" d="M68 25 L68 75 M94 25 L94 75 M68 50 L94 50" />
+</svg>

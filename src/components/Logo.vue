@@ -1,72 +1,53 @@
 <template>
-  <!-- Animated stroke rendering of initials OH, replacing original AF path animation -->
-  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Site logo OH">
+  <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Oscar Hickman - Logo">
     <title>Oscar Hickman</title>
-    <!-- Outer circle akin to cosmic boundary / particle horizon -->
-    <circle class="path-circle" cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="2.5" />
-    <!-- O drawn as a single path using arc to enable dash animation -->
-    <path class="path-o" d="M50 14 A36 36 0 1 1 49.999 14" stroke="currentColor" stroke-width="7" fill="none" stroke-linecap="round" />
-    <!-- H composed of three segments in one path for continuous stroke animation -->
-    <path class="path-h" d="M25 18 L25 82 M75 18 L75 82 M25 50 L75 50" stroke="currentColor" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Uppercase OH Monogram -->
+    <!-- The 'O' (Left side) -->
+    <circle cx="32" cy="50" r="28" fill="none" stroke="currentColor" stroke-width="10" />
+    <!-- The 'H' (Right side, sharing the right edge of O) -->
+    <path d="M68 22 L68 78 M92 22 L92 78 M68 50 L92 50" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 </template>
 
 <style scoped>
 svg {
   display: block;
+  animation: logo-pop 2s ease-out forwards;
 }
 
-@media (prefers-reduced-motion) {
-  .path-circle,
-  .path-o,
-  .path-h {
-    animation: none !important;
-    stroke-dasharray: none !important;
+@media (max-width: 640px) {
+  svg {
+    transform: scale(0.85);
   }
 }
 
-/* Shared animation base */
-.path-circle,
-.path-o,
-.path-h {
-  stroke-dashoffset: 1px;
-  stroke-dasharray: 400px 0; /* large value ensures full length covered */
-  animation: draw 3.5s ease forwards;
-}
-
-.path-o {
-  animation-delay: 0.2s;
-}
-.path-h {
-  animation-delay: 1.4s;
-}
-.path-circle {
-  animation-delay: 2.4s;
-  animation-duration: 4.5s;
-}
-
-@keyframes draw {
-  0% {
-    stroke-dasharray: 0 400px;
+@keyframes logo-pop {
+  from {
     opacity: 0;
+    transform: scale(0.9);
   }
-  10% {
+  to {
     opacity: 1;
-  }
-  60% {
-    stroke-dasharray: 400px 0;
-  }
-  90% {
-    stroke-dasharray: 400px 0;
-  }
-  100% {
-    stroke-dasharray: 0 400px;
+    transform: scale(1);
   }
 }
 
-.dark .path-circle,
-.dark .path-o,
-.dark .path-h {
-  stroke: #fdfdfd;
+@media (max-width: 640px) {
+  @keyframes logo-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.75);
+    }
+    to {
+      opacity: 1;
+      transform: scale(0.85);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  svg {
+    animation: none;
+  }
 }
 </style>
