@@ -60,6 +60,14 @@ This triggers `vite-ssg build`, runs custom scripts (OG image generation, font c
 - **Image Compression:** `pnpm compress`
 - **Redirects Generation:** `pnpm redirects`
 
+## Design & Branding
+
+- **Logo:** The site uses a minimalist "Orbit & Axis" uppercase monogram (`src/components/Logo.vue`).
+  - **Visuals:** Consists of a circular "O" and a three-stroke uppercase "H".
+  - **Animation:** A smooth 2-second `logo-pop` scale/fade animation.
+- **Favicon:** The `public/favicon.svg` is an extra-bold version of the monogram for high legibility in browser tabs. It includes a cache-busting version string in `index.html`.
+- **Consistency:** Always use `currentColor` in SVG components to ensure theme compatibility (light/dark mode).
+
 ## Development Conventions
 
 - **Code Style:** Follows [@antfu/eslint-config](https://github.com/antfu/eslint-config). Use `pnpm lint` to fix issues.

@@ -488,4 +488,5 @@ The build process regenerates OG images and all static output, so only source ne
 ---
 
 _Last updated: May 2026_
+_Updated Logo to "Orbit & Axis" Uppercase Monogram_
 _This summary is designed to help AI agents quickly understand the project structure, tooling, and conventions._

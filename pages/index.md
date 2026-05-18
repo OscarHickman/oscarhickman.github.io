@@ -5,16 +5,14 @@ image: /og.png
 art: random
 ---
 
-Hey! I'm Oscar Hickman — a cosmology researcher applying machine learning to understand the large-scale structure of the Universe.
+I'm Oscar Hickman, a cosmology researcher at Durham University working on machine learning to understand how the universe is structured on the largest scales.
 
-Currently based at Durham University (Institute for Computational Cosmology). Previously a quantitative developer; now focused on extracting physical insight from simulations and survey data using modern ML (graph networks, simulation-based inference, generative models). Interested in connecting statistical rigor with astrophysical interpretability.
+I started out as a quantitative developer, but these days I'm focused on pulling physical insight out of simulations and observational surveys using modern machine learning techniques (graph networks, simulation-based inference, and generative models). I care about building models that are both statistically sound and actually interpretable to astrophysicists.
 
-Outside research: mediocre triathlete, Cuban salsa dancer, and occasional sailor. These keep me honest about time management and energy.
-
-This site will grow as I add: publications, talks, project summaries, and exploratory notes on ML for cosmology. Early days — placeholders are here so future updates are easy.
+When not working, I'm a mediocre triathlete, Cuban salsa dancer, and occasional sailor. They're good at keeping me humbled.
 
 If you're working on ML for cosmology, simulation-based inference, or differentiable physics and want to chat/collaborate, feel free to reach out:
 
-**Email:** `oscar.hickman17@alumni.imperial.ac.uk`
+**Email:** `oscar.hickman17(at)alumni.imperial.ac.uk` (replace (at) with @)
 
 **Office:** OCW114, Department of Physics, Durham University, South Road, Durham, DH1 3LE, UK
