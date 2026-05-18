@@ -14,6 +14,8 @@
     "photos:import": "tsx scripts/import-photos.ts",
     "photos:cleanup": "tsx scripts/cleanup-duplicates.ts",
     "photos:captions": "tsx scripts/manage-captions.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "prepare": "simple-git-hooks"
   },
   "dependencies": {
@@ -58,6 +60,7 @@
     "@unocss/preset-web-fonts": "catalog:build",
     "@unpic/placeholder": "catalog:frontend",
     "@vitejs/plugin-vue": "catalog:build",
+    "@vue/test-utils": "catalog:dev",
     "ansis": "catalog:dev",
     "blurhash": "catalog:dev",
     "cross-env": "catalog:dev",
@@ -70,6 +73,7 @@
     "feed": "catalog:dev",
     "fs-extra": "catalog:dev",
     "gray-matter": "catalog:build",
+    "happy-dom": "catalog:dev",
     "heic-decode": "catalog:dev",
     "lint-staged": "catalog:dev",
     "markdown-it": "catalog:build",
@@ -97,7 +101,8 @@
     "vite-plugin-inspect": "catalog:build",
     "vite-plugin-optimize-exclude": "catalog:build",
     "vite-ssg": "catalog:build",
-    "vite-svg-loader": "catalog:build"
+    "vite-svg-loader": "catalog:build",
+    "vitest": "catalog:dev"
   },
   "resolutions": {
     "vite": "catalog:build"
