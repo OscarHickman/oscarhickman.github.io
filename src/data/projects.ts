@@ -148,7 +148,7 @@ export const projectCategories: ProjectCategory[] = [
     name: 'Web & Personal',
     projects: [
       {
-        name: 'Personal Website (Latest)',
+        name: 'Personal Website',
         link: 'https://github.com/OscarHickman/oscarhickman.github.io',
         desc: 'This website! Built with Vue 3, Vite, TypeScript, and Vite-SSG for static site generation',
         icon: 'i-carbon-globe',

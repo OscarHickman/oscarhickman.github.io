@@ -1,5 +1,6 @@
 export interface TalkPresentation {
   date: string
+  endDate?: string
   time?: string
   location?: string
   conference: string
@@ -47,6 +48,70 @@ We present a general method with which clustering can be recovered accurately fr
 The reduction in computational cost is sufficient to make galaxy clustering a viable statistic for use in the calibration of semi-analytical model parameters for the first time. Finally, we discuss the dependence of the required sampling rate on scale and galaxy population and outline the regime in which the sparse-sampling approximation is reliable.`,
             pdf: '/talks/FLAT.pdf',
             recording: '/talks/Oscar_FLAT.mp4',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: 'Conferences and Fieldwork',
+    talks: [
+      {
+        title: 'BUGS2026: Building Galaxies from Scratch II',
+        presentations: [
+          {
+            date: '2026-09-07',
+            endDate: '2026-09-11',
+            conference: 'Building Galaxies',
+            conferenceUrl: 'https://wwwmpa.mpa-garching.mpg.de/conf/bugs2026/',
+            location: 'Heidelberg, Germany',
+          },
+        ],
+      },
+      {
+        title: 'DESI Summer 2026 Collaboration Meeting',
+        presentations: [
+          {
+            date: '2026-07-12',
+            endDate: '2026-07-16',
+            conference: 'DESI Durham 2026',
+            conferenceUrl: 'https://pay.durham.ac.uk/event-durham/desi-summer-2026-collaboration-meeting',
+            location: 'Durham University, Durham, UK',
+          },
+        ],
+      },
+      {
+        title: 'Simulation Based Inference for Galaxy Evolution 2026',
+        presentations: [
+          {
+            date: '2026-06-23',
+            endDate: '2026-06-26',
+            conference: 'SBI GALEV 2026',
+            conferenceUrl: 'https://sbi-galev.github.io/2026/#dates',
+            location: 'Kavli Institute for Cosmology, Cambridge, UK',
+          },
+        ],
+      },
+      {
+        title: 'DESI Support Observing',
+        presentations: [
+          {
+            date: '2026-02-23',
+            endDate: '2026-02-27',
+            conference: 'Kitt Peak National Observatory',
+            location: 'Arizona, USA',
+          },
+        ],
+      },
+      {
+        title: 'DEX-XXII: 22nd Durham-Edinburgh eXtragalactic Workshop',
+        presentations: [
+          {
+            date: '2026-01-08',
+            endDate: '2026-01-09',
+            conference: 'DEX 2026',
+            conferenceUrl: 'https://indico.ph.ed.ac.uk/event/389/',
+            location: 'University of Edinburgh, Edinburgh, UK',
           },
         ],
       },
