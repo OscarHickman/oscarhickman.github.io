@@ -13,6 +13,6 @@ When not working, I'm a mediocre triathlete, Cuban salsa dancer, and occasional 
 
 If you're working on ML for cosmology, simulation-based inference, or differentiable physics and want to chat/collaborate, feel free to reach out:
 
-**Email:** `oscar.hickman17(at)alumni.imperial.ac.uk` (replace (at) with @)
+**Email:** [oscar.hickman17@alumni.imperial.ac.uk](mailto:oscar.hickman17@alumni.imperial.ac.uk)
 
 **Office:** OCW114, Department of Physics, Durham University, South Road, Durham, DH1 3LE, UK

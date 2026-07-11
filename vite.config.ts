@@ -145,22 +145,62 @@ export default defineConfig({
         (() => {
           if (!id.endsWith('.md'))
             return
-          const route = basename(id, '.md')
-          if (route === 'index' || frontmatter.image || !frontmatter.title)
-            return
-          const path = `og/${route}.png`
-          promises.push(
-            fs.existsSync(`${id.slice(0, -3)}.png`)
-              ? fs.copy(`${id.slice(0, -3)}.png`, `public/${path}`)
-              : generateOg(frontmatter.title!.replace(/\s-\s.*$/, '').trim(), `public/${path}`),
-          )
-          // Use custom domain if set, else GitHub Pages project path fallback
+
+          // oscarhickman.io/.me are not registered/resolving yet - use the live
+          // GitHub Pages user-site domain (served at root) until a real custom domain is set up
           const hostBase = process.env.USE_CUSTOM_DOMAIN === '1'
             ? 'https://oscarhickman.io'
-            : 'https://oscarhickman.github.io/OscarHickman.io'
-          frontmatter.image = `${hostBase}/${path}`
+            : 'https://oscarhickman.github.io'
+
+          const route = basename(id, '.md')
+
+          if (route !== 'index' && !frontmatter.image && frontmatter.title) {
+            const path = `og/${route}.png`
+            promises.push(
+              fs.existsSync(`${id.slice(0, -3)}.png`)
+                ? fs.copy(`${id.slice(0, -3)}.png`, `public/${path}`)
+                : generateOg(frontmatter.title!.replace(/\s-\s.*$/, '').trim(), `public/${path}`),
+            )
+            frontmatter.image = `${hostBase}/${path}`
+          }
+          else if (frontmatter.image?.startsWith('/')) {
+            // Relative image paths aren't valid for og:image/twitter:image - crawlers need an absolute URL
+            frontmatter.image = `${hostBase}${frontmatter.image}`
+          }
+
+          const idx = id.replace(/\\/g, '/').indexOf('/pages/')
+          let routePath = idx >= 0 ? id.slice(idx + '/pages/'.length).replace(/\.md$/, '') : ''
+          routePath = routePath === 'index' ? '' : routePath.replace(/\/index$/, '')
+          if (!routePath.startsWith('['))
+            frontmatter.canonicalUrl = `${hostBase}/${routePath}`.replace(/\/$/, '') || hostBase
+
+          if (routePath === '') {
+            frontmatter.personSchema = JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              'name': 'Oscar Hickman',
+              'url': hostBase,
+              'jobTitle': 'Machine Learning Cosmology Researcher',
+              'affiliation': {
+                '@type': 'CollegeOrUniversity',
+                'name': 'Durham University, Institute for Computational Cosmology',
+              },
+              'sameAs': [
+                'https://github.com/OscarHickman',
+                'https://www.linkedin.com/in/oscarhickman',
+                'https://www.strava.com/athletes/36376289',
+              ],
+            })
+          }
         })()
         const head = defaults(frontmatter, options)
+        if (frontmatter.canonicalUrl) {
+          head.link = [...(head.link || []), { rel: 'canonical', href: frontmatter.canonicalUrl }]
+          head.meta = [...(head.meta || []), { property: 'og:url', content: frontmatter.canonicalUrl }]
+        }
+        if (frontmatter.personSchema) {
+          head.script = [...(head.script || []), { type: 'application/ld+json', innerHTML: frontmatter.personSchema }]
+        }
         return { head, frontmatter }
       },
     }),

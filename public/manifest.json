@@ -1,0 +1,14 @@
+{
+  "name": "Oscar Hickman",
+  "short_name": "Oscar Hickman",
+  "description": "Machine Learning Cosmology | Oscar Hickman",
+  "start_url": "/",
+  "display": "browser",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
