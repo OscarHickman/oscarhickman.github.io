@@ -49,23 +49,33 @@ function slug(name: string) {
 .project-card {
   display: flex;
   flex-direction: column;
-  padding: 1.25rem;
+  padding: 1.35rem;
   border-radius: 8px;
-  border: 1px solid #8882;
-  transition: all 0.3s ease;
+  border: 1px solid var(--c-border);
+  background: color-mix(in srgb, var(--c-bg) 75%, transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   color: inherit;
-  background: transparent;
 }
 
 .project-card:hover {
-  border-color: #888;
-  background: #8881;
+  border-color: var(--c-accent);
+  box-shadow:
+    0 4px 20px var(--c-accent-glow),
+    0 0 0 1px var(--c-accent);
   transform: translateY(-2px);
 }
 
 .project-title {
   color: inherit;
+  font-family:
+    'Space Grotesk',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: -0.01em;
 }
 
 .project-tags {
@@ -74,11 +84,14 @@ function slug(name: string) {
 
 .tag {
   display: inline-block;
-  padding: 0.25rem 0.5rem;
-  border-radius: 3px;
-  background: #8881;
-  font-size: 0.75rem;
-  opacity: 0.6;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--c-accent) 12%, transparent);
+  color: var(--c-accent);
+  border: 1px solid color-mix(in srgb, var(--c-accent) 25%, transparent);
+  font-size: 0.72rem;
+  font-family: 'DM Mono', monospace;
   font-weight: 500;
+  letter-spacing: 0.02em;
 }
 </style>

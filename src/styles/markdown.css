@@ -61,10 +61,10 @@ html:not(.dark) .shiki span {
 }
 
 .prose {
-  --fg-light: #888;
-  --fg: #555;
-  --fg-deep: #222;
-  --fg-deeper: #000;
+  --fg-light: #64748b;
+  --fg: #334155;
+  --fg-deep: #0f172a;
+  --fg-deeper: #020617;
 
   color: var(--fg);
 }
@@ -72,12 +72,13 @@ html:not(.dark) .shiki span {
 .prose a {
   font-weight: inherit;
   text-decoration: none;
-  border-bottom: 1px solid rgba(125, 125, 125, 0.3);
-  transition: border 0.3s ease-in-out;
+  border-bottom: 1px solid var(--c-border);
+  transition: all 0.2s ease-in-out;
 }
 
 .prose a:hover {
-  border-bottom: 1px solid var(--fg);
+  border-bottom-color: var(--c-accent);
+  color: var(--c-accent);
 }
 
 .prose a code {
@@ -90,10 +91,10 @@ html:not(.dark) .shiki span {
 }
 
 html.dark .prose {
-  --fg-light: #888;
-  --fg: #bbb;
-  --fg-deep: #ddd;
-  --fg-deeper: #fff;
+  --fg-light: #94a3b8;
+  --fg: #cbd5e1;
+  --fg-deep: #f1f5f9;
+  --fg-deeper: #ffffff;
 }
 
 a.item {

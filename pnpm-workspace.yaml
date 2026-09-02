@@ -5,7 +5,7 @@ catalogs:
     '@shikijs/markdown-it': ^3.13.0
     '@shikijs/transformers': ^3.13.0
     '@shikijs/twoslash': ^3.13.0
-    '@unocss/preset-web-fonts': ^66.5.4
+    '@unocss/preset-web-fonts': catalog:build
     '@vitejs/plugin-vue': ^6.0.1
     gray-matter: ^4.0.3
     markdown-it: ^14.1.0

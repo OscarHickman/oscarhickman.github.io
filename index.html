@@ -14,14 +14,12 @@
     <title>Oscar Hickman</title>
     <script>
       ;(function () {
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-        const setting = localStorage.getItem('vueuse-color-scheme') || 'auto'
-        if (setting === 'dark' || (prefersDark && setting !== 'light'))
-          document.documentElement.classList.toggle('dark', true)
+        const setting = localStorage.getItem('vueuse-color-scheme')
+        if (setting === 'dark' || setting == null) document.documentElement.classList.toggle('dark', true)
       })()
     </script>
   </head>
-  <body class="font-sans text-gray-700 dark:text-gray-200 relative">
+  <body class="relative">
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

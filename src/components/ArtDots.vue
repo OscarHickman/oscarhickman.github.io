@@ -1,115 +1,141 @@
 <script setup lang="ts">
-import type { Texture } from 'pixi.js'
-import { Application, Graphics, Particle, ParticleContainer } from 'pixi.js'
-import { createNoise3D } from 'simplex-noise'
+const el = useTemplateRef<HTMLCanvasElement>('el')
 
-const el = useTemplateRef('el')
-
-let w = window.innerWidth
-let h = window.innerHeight
-
-const SCALE = 200
-const LENGTH = 5
-const SPACING = 15
-
-const noise3d = createNoise3D()
-
-const existingPoints = new Set<string>()
-const points: { x: number, y: number, opacity: number, particle: Particle }[] = []
-
-function getForceOnPoint(x: number, y: number, z: number) {
-  return (noise3d(x / SCALE, y / SCALE, z) - 0.5) * 2 * Math.PI
+interface Star {
+  x: number
+  y: number
+  radius: number
+  baseAlpha: number
+  twinkleSpeed: number
+  twinklePhase: number
+  color: string
+  driftX: number
+  driftY: number
 }
 
-const mountedScope = effectScope()
+let animId: number | null = null
+const stars: Star[] = []
 
-function createDotTexture(app: Application) {
-  const g = new Graphics().circle(0, 0, 1).fill(0xCCCCCC)
-  return app.renderer.generateTexture(g)
-}
+// Realistic stellar spectral colours (hot O/B blue-white, A/F white, G/K warm white, rare amber)
+const STAR_COLORS = [
+  '#e2ecff', // O/B blue-white
+  '#f8faff', // A white
+  '#ffffff', // Pure white
+  '#fff6e8', // F/G warm white
+  '#ffdca8', // K light orange
+]
 
-function addPoints({ dotTexture, particleContainer }: { dotTexture: Texture, particleContainer: ParticleContainer }) {
-  for (let x = -SPACING / 2; x < w + SPACING; x += SPACING) {
-    for (let y = -SPACING / 2; y < h + SPACING; y += SPACING) {
-      const id = `${x}-${y}`
-      if (existingPoints.has(id))
-        continue
-      existingPoints.add(id)
+function initStars(width: number, height: number) {
+  stars.length = 0
+  const count = Math.floor((width * height) / 5800)
 
-      const particle = new Particle(dotTexture)
-      particle.anchorX = 0.5
-      particle.anchorY = 0.5
-      particleContainer.addParticle(particle)
+  for (let i = 0; i < count; i++) {
+    const rSample = Math.random()
+    let radius = 0.55
+    let baseAlpha = 0.35 + Math.random() * 0.45
 
-      const opacity = Math.random() * 0.5 + 0.5
-      points.push({ x, y, opacity, particle })
+    if (rSample > 0.94) {
+      radius = 1.35 + Math.random() * 0.55
+      baseAlpha = 0.75 + Math.random() * 0.25
     }
+    else if (rSample > 0.75) {
+      radius = 0.9 + Math.random() * 0.35
+      baseAlpha = 0.5 + Math.random() * 0.35
+    }
+
+    stars.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      radius,
+      baseAlpha,
+      twinkleSpeed: 0.8 + Math.random() * 2.2,
+      twinklePhase: Math.random() * Math.PI * 2,
+      color: STAR_COLORS[Math.floor(Math.random() * STAR_COLORS.length)],
+      driftX: (Math.random() - 0.5) * 0.04,
+      driftY: (Math.random() - 0.5) * 0.04,
+    })
   }
 }
 
-async function setup() {
-  if (el.value == null)
+onMounted(() => {
+  const canvas = el.value
+  if (!canvas)
     return
-  const app = new Application()
-  await app.init({
-    background: '#ffffff',
-    antialias: true,
-    resolution: window.devicePixelRatio,
-    resizeTo: el.value,
-    eventMode: 'none',
-    autoDensity: true,
-  })
-  el.value.appendChild(app.canvas)
 
-  const particleContainer = new ParticleContainer({ dynamicProperties: { position: true, alpha: true } })
-  app.stage.addChild(particleContainer)
+  const ctx = canvas.getContext('2d')
+  if (!ctx)
+    return
 
-  const dotTexture = createDotTexture(app)
-  addPoints({ dotTexture, particleContainer })
+  let width = window.innerWidth
+  let height = window.innerHeight
+  const dpr = Math.min(window.devicePixelRatio || 1, 2)
 
-  app.ticker.add(() => {
-    const t = Date.now() / 10000
+  function resize() {
+    width = window.innerWidth
+    height = window.innerHeight
+    if (!canvas)
+      return
+    canvas.width = width * dpr
+    canvas.height = height * dpr
+    canvas.style.width = `${width}px`
+    canvas.style.height = `${height}px`
+    ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
+    initStars(width, height)
+  }
 
-    for (const p of points) {
-      const { x, y, opacity, particle } = p
-      const rad = getForceOnPoint(x, y, t)
-      const len = (noise3d(x / SCALE, y / SCALE, t * 2) + 0.5) * LENGTH
-      const nx = x + Math.cos(rad) * len
-      const ny = y + Math.sin(rad) * len
+  resize()
+  window.addEventListener('resize', resize)
 
-      particle.x = nx
-      particle.y = ny
-      particle.alpha = (Math.abs(Math.cos(rad)) * 0.8 + 0.2) * opacity
+  let lastTime = performance.now()
+
+  function draw(now: number) {
+    const dt = (now - lastTime) / 1000
+    lastTime = now
+
+    ctx!.clearRect(0, 0, width, height)
+
+    const scrollY = window.scrollY || 0
+    const parallaxOffset = (scrollY * 0.05) % height
+
+    for (const star of stars) {
+      star.twinklePhase += star.twinkleSpeed * dt
+      const twinkle = Math.sin(star.twinklePhase) * 0.25
+      const currentAlpha = Math.max(0.08, Math.min(1, star.baseAlpha + twinkle))
+
+      star.x = (star.x + star.driftX * dt * 60 + width) % width
+      const renderY = (star.y - parallaxOffset + height) % height
+
+      ctx!.beginPath()
+      ctx!.arc(star.x, renderY, star.radius, 0, Math.PI * 2)
+      ctx!.fillStyle = star.color
+      ctx!.globalAlpha = currentAlpha
+      ctx!.fill()
+
+      if (star.radius > 1.2) {
+        ctx!.beginPath()
+        ctx!.arc(star.x, renderY, star.radius * 2.8, 0, Math.PI * 2)
+        ctx!.fillStyle = star.color
+        ctx!.globalAlpha = currentAlpha * 0.18
+        ctx!.fill()
+      }
     }
+
+    ctx!.globalAlpha = 1
+    animId = requestAnimationFrame(draw)
+  }
+
+  animId = requestAnimationFrame(draw)
+
+  onUnmounted(() => {
+    if (animId)
+      cancelAnimationFrame(animId)
+    window.removeEventListener('resize', resize)
   })
-
-  mountedScope.run(() => {
-    useEventListener('resize', () => {
-      w = window.innerWidth
-      h = window.innerHeight
-      addPoints({ dotTexture, particleContainer })
-    })
-    onScopeDispose(() => {
-      // For some reason this throws an error, maybe something wrong with pixi.js
-      try {
-        app?.destroy(true, { children: true, texture: true, textureSource: true })
-      }
-      catch (error) {
-        console.error(error)
-      }
-    })
-  })
-}
-
-onMounted(async () => {
-  await setup()
-})
-
-onUnmounted(() => {
-  mountedScope.stop()
 })
 </script>
 
 <template>
-  <div ref="el" z--1 fixed size-screen left-0 right-0 top-0 bottom-0 pointer-events-none dark:invert />
+  <div class="fixed top-0 bottom-0 left-0 right-0 pointer-events-none z--1 overflow-hidden" aria-hidden="true">
+    <canvas ref="el" class="block w-full h-full dark:opacity-85 opacity-30 transition-opacity duration-700" />
+  </div>
 </template>

@@ -16,7 +16,7 @@ catalogs:
       specifier: ^3.13.0
       version: 3.13.0
     '@unocss/preset-web-fonts':
-      specifier: ^66.5.4
+      specifier: catalog:build
       version: 66.5.4
     '@vitejs/plugin-vue':
       specifier: ^6.0.1

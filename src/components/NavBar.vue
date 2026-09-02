@@ -65,6 +65,14 @@ const { y: scroll } = useWindowScroll()
 </template>
 
 <style scoped>
+.header {
+  border-bottom: 1px solid var(--c-border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: color-mix(in srgb, var(--c-bg) 85%, transparent);
+  transition: border-color 0.3s ease;
+}
+
 .header h1 {
   margin-bottom: 0;
 }
@@ -76,11 +84,17 @@ const { y: scroll } = useWindowScroll()
 }
 
 .nav {
-  padding: 2rem;
+  padding: 1.5rem 2rem;
   width: 100%;
   display: grid;
   grid-template-columns: auto max-content;
   box-sizing: border-box;
+  font-family:
+    'Space Grotesk',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: 0.02em;
 }
 
 .nav > * {
@@ -95,19 +109,20 @@ const { y: scroll } = useWindowScroll()
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-  transition: opacity 0.2s ease;
-  opacity: 0.6;
+  transition: all 0.2s ease;
+  opacity: 0.7;
   outline: none;
 }
 
-.nav a:hover {
+.nav a:hover,
+.nav a.router-link-active {
   opacity: 1;
-  text-decoration-color: inherit;
+  color: var(--c-accent);
 }
 
 .nav .right {
   display: grid;
-  grid-gap: 1.2rem;
+  grid-gap: 1.5rem;
   grid-auto-flow: column;
 }
 

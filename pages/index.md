@@ -2,7 +2,7 @@
 title: Oscar Hickman
 description: Machine Learning Cosmology | Oscar Hickman
 image: /og.png
-art: random
+art: dots
 ---
 
 I'm Oscar Hickman, a cosmology researcher at Durham University working on machine learning to understand how the universe is structured on the largest scales.
