@@ -53,8 +53,6 @@ The site is built as a **static site** using modern web technologies, deployed o
 - **NProgress** (page loading indicator)
 - **Vue Use** (@vueuse/core, composition utilities)
 - **D3** (d3-hierarchy, d3-shape)
-- **Matter.js** (physics simulation, with attractors plugin)
-- **Pixi.js** (2D WebGL rendering)
 - **Simplex Noise** (procedural generation)
 
 ### Deployment & CI
@@ -77,24 +75,18 @@ oscarhickman.io/
 │   │   ├── ToggleTheme.vue   # Dark/light mode toggle with view transitions
 │   │   ├── ListPosts.vue     # Renders paginated lists of posts
 │   │   ├── ListTalks.vue     # Renders list of talks with dates
+│   │   ├── ListTalksByCategory.vue # Renders talks organized by category
 │   │   ├── ListProjects.vue  # Grid of project cards
-│   │   ├── ListPublications.vue
+│   │   ├── ListPublications.vue # Academic publications & preprints
 │   │   ├── WrapperPost.vue   # Layout wrapper for markdown posts
-│   │   ├── WrapperDemo.vue   # Layout wrapper for interactive demos
-│   │   ├── MediaConsumption.vue # Anime/books/games tracking
 │   │   ├── ArtPlum.vue       # Procedural art component (simplex noise)
 │   │   ├── ArtDots.vue       # Procedural dot pattern
-│   │   ├── AsyncSyncQuantum.vue # Interactive Matter.js physics demo
 │   │   ├── YouTubeEmbed.vue  # Embeds YouTube videos
-│   │   ├── Tweet.vue         # Tweet embeds
 │   │   ├── TalkDate.vue      # Talk date formatting
 │   │   ├── TextCopy.vue      # Copy-to-clipboard text
-│   │   ├── CalCom.vue        # Cal.com booking embed
 │   │   ├── icons/            # Custom icon components
 │   │   ├── photos/           # Photo gallery components
-│   │   ├── slides/           # Slide deck components
-│   │   ├── shiki/            # Syntax highlighting components
-│   │   └── qrcode/           # QR code components
+│   │   └── shiki/            # Syntax highlighting components
 │   ├── logics/               # Composition functions
 │   │   └── index.ts          # isDark(), galleryView, toggleDark() with view transitions
 │   ├── store/                # Pinia stores
@@ -104,11 +96,9 @@ oscarhickman.io/
 │   │   ├── prose.css         # Markdown prose styling
 │   │   └── markdown.css      # Markdown-specific overrides
 │   └── data/                 # Data files (TypeScript)
-│       ├── projects.ts       # Export projectCategories with 18 GitHub projects
+│       ├── projects.ts       # Export projectCategories with GitHub projects
 │       ├── publications.ts   # Export publications[] array
-│       ├── talks.ts          # Export talks[] array
-│       ├── media.ts          # Anime/book/game/song tracking with state
-│       └── sponsors-circles.json # Sponsor data
+│       └── talks.ts          # Export talks[] array
 ├── pages/                    # File-based routing (Vue Router auto)
 │   ├── index.md              # Home page (hero section)
 │   ├── projects.md           # Portfolio of 18 GitHub projects (6 categories)

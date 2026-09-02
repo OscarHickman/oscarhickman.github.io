@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { talkCategories } from '../../data/talks'
+import { talkCategories } from '~/data/talks'
 import { formatDate } from '../logics'
 
 function getSlug(title: string) {

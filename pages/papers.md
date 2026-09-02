@@ -1,8 +1,8 @@
 ---
 title: Papers - Oscar Hickman
 display: Papers
-description: Publications and preprints
+description: Research publications, preprints, and manuscripts
 art: plum
 ---
 
-Papers coming soon.
+<ListPublications />
