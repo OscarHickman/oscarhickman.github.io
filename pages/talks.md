@@ -2,7 +2,7 @@
 title: Talks - Oscar Hickman
 display: Talks
 description: Public talks and presentations
-art: plum
+art: dots
 ---
 
 <ListTalksByCategory />

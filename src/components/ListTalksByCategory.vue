@@ -41,16 +41,18 @@ function formatRange(start: string, end?: string) {
   <div class="prose m-auto">
     <template v-for="category, catIdx in talkCategories" :key="category.name">
       <div :id="getSlug(category.name)" :class="catIdx > 0 ? 'mt-16' : ''">
-        <h2 mb8 pb4 border="b-2 hex-888" inline-block>
+        <h2 mb8 pb2 border-b border-base inline-block text-xl class="category-heading">
           {{ category.name }}
         </h2>
 
         <div v-if="!category.talks.length" py8 text-center op50>
-          <p>Coming soon...</p>
+          <p class="font-mono text-sm tracking-wide">
+            Coming soon...
+          </p>
         </div>
 
         <template v-for="talk, talkIdx in category.talks" :key="talk.title">
-          <div v-if="!talk.lang || talk.lang === 'en'" :class="talkIdx > 0 ? 'mt-12 pt-12 border-t border-hex-8882' : ''">
+          <div v-if="!talk.lang || talk.lang === 'en'" :class="talkIdx > 0 ? 'mt-12 pt-12 border-t talk-divider' : ''">
             <template v-for="p, presIdx in talk.presentations" :key="presIdx">
               <template v-if="!p.lang || p.lang === 'en'">
                 <div :lang="p.lang" mb8>
@@ -61,19 +63,19 @@ function formatRange(start: string, end?: string) {
                     </a>
                     <span v-else font-semibold>{{ p.conference }}:</span>
                     <span ml2 op80 font-normal>{{ talk.title }}</span>
-                    <span v-if="isFuture(p.date)" ml2 px2 py0.5 text-xs font-bold uppercase tracking-wider bg-hex-8883 text-hex-888 rounded>Upcoming</span>
+                    <span v-if="isFuture(p.date)" class="badge-upcoming ml2">Upcoming</span>
                   </h3>
 
                   <!-- Single Title (Fieldwork Section) -->
                   <h3 v-else :id="`${getSlug(category.name)}-${getSlug(talk.title)}`" tabindex="-1" mb2 :lang="talk.lang" text-xl font-semibold>
                     {{ talk.title }}
-                    <span v-if="isFuture(p.date)" ml2 px2 py0.5 text-xs font-bold uppercase tracking-wider bg-hex-8883 text-hex-888 rounded>Upcoming</span>
+                    <span v-if="isFuture(p.date)" class="badge-upcoming ml2">Upcoming</span>
                   </h3>
 
                   <!-- Date, Time, Institution & Location -->
                   <div text-sm op70 space-y-1 mb6>
-                    <div flex="~ gap-2 items-baseline">
-                      <span v-if="p.date">{{ formatRange(p.date, p.endDate) }}</span>
+                    <div flex="~ gap-2 items-baseline" font-mono text-xs>
+                      <span v-if="p.date" class="talk-date">{{ formatRange(p.date, p.endDate) }}</span>
                       <span v-if="p.time" text-xs op70>at {{ p.time }}</span>
                     </div>
                     <div v-if="p.institution" font-semibold>
@@ -92,8 +94,8 @@ function formatRange(start: string, end?: string) {
                   </div>
 
                   <!-- Abstract -->
-                  <div v-if="p.abstract" mt6 mb6 p5 bg-hex-8882 rounded-lg border="l-3 hex-888">
-                    <div text-sm leading-relaxed whitespace-pre-wrap op90>
+                  <div v-if="p.abstract" class="talk-abstract mt6 mb6 p5 rounded-lg">
+                    <div text-sm leading-relaxed whitespace-pre-wrap op90 font-sans>
                       {{ p.abstract }}
                     </div>
                   </div>
@@ -150,3 +152,44 @@ function formatRange(start: string, end?: string) {
     </template>
   </div>
 </template>
+
+<style scoped>
+.category-heading {
+  font-family:
+    'Space Grotesk',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: -0.015em;
+}
+
+.talk-divider {
+  border-top-color: var(--c-border);
+}
+
+.badge-upcoming {
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: var(--c-accent-glow);
+  color: var(--c-accent);
+  border: 1px solid var(--c-border);
+  border-radius: 4px;
+}
+
+.talk-date {
+  color: var(--c-accent-warm);
+}
+
+.talk-abstract {
+  background-color: color-mix(in srgb, var(--c-bg) 85%, white);
+  border: 1px solid var(--c-border);
+  border-left: 3px solid var(--c-accent);
+}
+
+html.dark .talk-abstract {
+  background-color: color-mix(in srgb, var(--c-bg) 80%, transparent);
+}
+</style>
