@@ -92,9 +92,10 @@ html:not(.dark) .shiki span {
 
 html.dark .prose {
   --fg-light: #94a3b8;
-  --fg: #cbd5e1;
-  --fg-deep: #f1f5f9;
+  --fg: #e2e8f0;
+  --fg-deep: #f8fafc;
   --fg-deeper: #ffffff;
+  color: var(--fg);
 }
 
 a.item {

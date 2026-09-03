@@ -13,7 +13,7 @@ function slug(name: string) {
       :key="key"
     >
       <div :id="slug(key)" :class="cidx > 0 ? 'mt-16' : 'mt-0'">
-        <h2 mb8>
+        <h2 mb8 pb2 border-b border-base inline-block class="category-heading">
           {{ key }}
         </h2>
 
@@ -80,6 +80,16 @@ function slug(name: string) {
 
 .project-tags {
   margin-top: auto;
+}
+
+.category-heading {
+  font-family:
+    'Space Grotesk',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  letter-spacing: -0.015em;
+  font-weight: 600;
 }
 
 .tag {
