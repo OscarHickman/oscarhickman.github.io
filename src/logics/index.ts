@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 
-export const isDark = useDark({ initialValue: true })
+export const isDark = useDark({ initialValue: 'dark' })
 export const galleryView = useLocalStorage<'cover' | 'contain'>('oscarhickman-gallery-view', 'cover')
 
 /**
