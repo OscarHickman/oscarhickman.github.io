@@ -110,12 +110,12 @@ Create `src/styles/tokens.css`, imported first. Everything downstream references
 
 ### Phase 3 — Stylesheet architecture
 
-- [ ] Restructure into a clear cascade: `tokens.css` → `reset.css` → `base.css` (element defaults, typography) → `prose.css` (markdown only) → `utilities.css`.
-- [ ] **Prune `prose.css`** hard. Delete the vendored Tailwind-typography rules that are never exercised (`ol[type='A s']` and friends), and rewrite every remaining colour against tokens — killing the four hardcoded greys.
-- [ ] Fold `markdown.css` Shiki rules into `prose.css`; keep only genuine third-party overrides (Floating Vue, NProgress) separate, in `vendor.css`.
-- [ ] Replace the 20 hand-written `nth-child` stagger rules with a single generated rule.
-- [ ] Replace the `scale(1.05)` image hack with a proper `--prose-bleed` full-bleed utility driven by the existing `--prose-*` variables.
-- [ ] Target: **under 600 total CSS lines**, down from 1090, with no dead rules.
+- [x] Restructure into a clear cascade: `tokens.css` → `reset.css` → `base.css` (element defaults, typography) → `prose.css` (markdown only) → `utilities.css`.
+- [x] **Prune `prose.css`** hard. Delete the vendored Tailwind-typography rules that are never exercised (`ol[type='A s']` and friends), and rewrite every remaining colour against tokens — killing the four hardcoded greys.
+- [x] Fold `markdown.css` Shiki rules into `prose.css`; keep only genuine third-party overrides (Floating Vue, NProgress) separate, in `vendor.css`.
+- [x] Replace the 20 hand-written `nth-child` stagger rules with a single generated rule.
+- [x] Replace the `scale(1.05)` image hack with a proper `--prose-bleed` full-bleed utility driven by the existing `--prose-*` variables.
+- [x] Target: **under 600 total CSS lines**, down from 1090, with no dead rules.
 
 ---
 

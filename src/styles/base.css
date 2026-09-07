@@ -1,0 +1,202 @@
+/* HTML & Element Defaults */
+html {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 85% 100%, rgba(251, 191, 36, 0.04), transparent);
+  background-attachment: fixed;
+  color: var(--fg);
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--accent-muted);
+  color: var(--fg);
+}
+
+* {
+  scrollbar-color: var(--scrollbar) var(--bg);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 6px;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: var(--bg);
+  border-radius: var(--r-full);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar);
+  border-radius: var(--r-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-hover);
+}
+
+/* Typography elements */
+body {
+  font-family: var(--font-text);
+  letter-spacing: 0.01em;
+  line-height: var(--lh-normal);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-heading {
+  font-family: var(--font-display);
+  letter-spacing: var(--ls-snug);
+}
+
+code,
+pre,
+.font-mono {
+  font-family: var(--font-mono) !important;
+}
+
+/* Transitions */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity var(--dur-fast) var(--ease);
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* View transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: var(--z-max);
+}
+
+.dark::view-transition-old(root) {
+  z-index: var(--z-max);
+}
+
+.dark::view-transition-new(root) {
+  z-index: 1;
+}
+
+/* Dark / light image visibility helpers */
+.dark [img-light] {
+  display: none;
+}
+
+html:not(.dark) [img-dark] {
+  display: none;
+}
+
+/* Stagger animations */
+@keyframes slide-enter {
+  0% {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.no-sliding) [slide-enter],
+  html:not(.no-sliding) .slide-enter,
+  html:not(.no-sliding) .slide-enter-content > *:not(:has(.table-of-contents)) {
+    --enter-stage: 0;
+    --enter-step: 50ms;
+    --enter-initial: 0ms;
+    animation: slide-enter var(--dur-slow) var(--ease) both 1;
+    animation-delay: calc(var(--enter-initial) + var(--enter-stage) * var(--enter-step));
+  }
+
+  .slide-enter-content > *:nth-child(1) {
+    --enter-stage: 1 !important;
+  }
+  .slide-enter-content > *:nth-child(2) {
+    --enter-stage: 2 !important;
+  }
+  .slide-enter-content > *:nth-child(3) {
+    --enter-stage: 3 !important;
+  }
+  .slide-enter-content > *:nth-child(4) {
+    --enter-stage: 4 !important;
+  }
+  .slide-enter-content > *:nth-child(5) {
+    --enter-stage: 5 !important;
+  }
+  .slide-enter-content > *:nth-child(6) {
+    --enter-stage: 6 !important;
+  }
+  .slide-enter-content > *:nth-child(7) {
+    --enter-stage: 7 !important;
+  }
+  .slide-enter-content > *:nth-child(8) {
+    --enter-stage: 8 !important;
+  }
+  .slide-enter-content > *:nth-child(9) {
+    --enter-stage: 9 !important;
+  }
+  .slide-enter-content > *:nth-child(10) {
+    --enter-stage: 10 !important;
+  }
+  .slide-enter-content > *:nth-child(11) {
+    --enter-stage: 11 !important;
+  }
+  .slide-enter-content > *:nth-child(12) {
+    --enter-stage: 12 !important;
+  }
+  .slide-enter-content > *:nth-child(13) {
+    --enter-stage: 13 !important;
+  }
+  .slide-enter-content > *:nth-child(14) {
+    --enter-stage: 14 !important;
+  }
+  .slide-enter-content > *:nth-child(15) {
+    --enter-stage: 15 !important;
+  }
+  .slide-enter-content > *:nth-child(16) {
+    --enter-stage: 16 !important;
+  }
+  .slide-enter-content > *:nth-child(17) {
+    --enter-stage: 17 !important;
+  }
+  .slide-enter-content > *:nth-child(18) {
+    --enter-stage: 18 !important;
+  }
+  .slide-enter-content > *:nth-child(19) {
+    --enter-stage: 19 !important;
+  }
+  .slide-enter-content > *:nth-child(20) {
+    --enter-stage: 20 !important;
+  }
+}
