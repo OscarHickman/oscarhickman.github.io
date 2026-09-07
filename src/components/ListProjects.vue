@@ -70,11 +70,7 @@ function slug(name: string) {
 
 .project-title {
   color: inherit;
-  font-family:
-    'Space Grotesk',
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
+  font-family: var(--font-display);
   letter-spacing: -0.01em;
 }
 
@@ -83,11 +79,7 @@ function slug(name: string) {
 }
 
 .category-heading {
-  font-family:
-    'Space Grotesk',
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
+  font-family: var(--font-display);
   letter-spacing: -0.015em;
   font-weight: 600;
 }

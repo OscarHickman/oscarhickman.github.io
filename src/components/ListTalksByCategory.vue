@@ -155,11 +155,7 @@ function formatRange(start: string, end?: string) {
 
 <style scoped>
 .category-heading {
-  font-family:
-    'Space Grotesk',
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
+  font-family: var(--font-display);
   letter-spacing: -0.015em;
 }
 

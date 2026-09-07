@@ -1,36 +1,69 @@
 :root {
-  --c-bg: #f8fafc;
-  --c-fg: #0f172a;
-  --c-accent: #2563eb;
-  --c-accent-warm: #d97706;
-  --c-accent-glow: rgba(37, 99, 235, 0.15);
-  --c-border: rgba(148, 163, 184, 0.25);
-  --c-scrollbar: #e2e8f0;
-  --c-scrollbar-hover: #cbd5e1;
-  color-scheme: light dark;
-}
-
-html {
-  background-color: var(--c-bg);
-  color: var(--c-fg);
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-
-html.dark {
-  --c-bg: #070b14;
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-text: 'STIX Two Text', 'Computer Modern Roman', 'Times New Roman', 'Source Serif Pro', 'Charter', serif;
+  --font-mono: 'DM Mono', 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+  --focus: var(--c-accent);
+  --c-bg: #060913;
+  --c-bg-subtle: #0b1120;
   --c-fg: #e2e8f0;
+  --c-fg-muted: #94a3b8;
   --c-accent: #38bdf8;
   --c-accent-warm: #fbbf24;
   --c-accent-glow: rgba(56, 189, 248, 0.16);
-  --c-border: rgba(56, 189, 248, 0.15);
+  --c-border: rgba(56, 189, 248, 0.18);
   --c-scrollbar: #0f172a;
   --c-scrollbar-hover: #1e293b;
   color-scheme: dark;
 }
 
+html {
+  background-color: var(--c-bg);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(56, 189, 248, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 85% 100%, rgba(251, 191, 36, 0.04), transparent);
+  background-attachment: fixed;
+  color: var(--c-fg);
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+html:not(.dark) {
+  --c-bg: #f8fafc;
+  --c-bg-subtle: #f1f5f9;
+  --c-fg: #0f172a;
+  --c-fg-muted: #64748b;
+  --c-accent: #0284c7;
+  --c-accent-warm: #d97706;
+  --c-accent-glow: rgba(2, 132, 199, 0.15);
+  --c-border: rgba(15, 23, 42, 0.12);
+  --c-scrollbar: #cbd5e1;
+  --c-scrollbar-hover: #94a3b8;
+  color-scheme: light;
+}
+
+html.dark {
+  --c-bg: #060913;
+  --c-bg-subtle: #0b1120;
+  --c-fg: #e2e8f0;
+  --c-fg-muted: #94a3b8;
+  --c-accent: #38bdf8;
+  --c-accent-warm: #fbbf24;
+  --c-accent-glow: rgba(56, 189, 248, 0.16);
+  --c-border: rgba(56, 189, 248, 0.18);
+  --c-scrollbar: #0f172a;
+  --c-scrollbar-hover: #1e293b;
+  color-scheme: dark;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
 ::selection {
-  background: rgba(56, 189, 248, 0.25);
+  background: rgba(56, 189, 248, 0.3);
+  color: #ffffff;
 }
 
 #nprogress {
@@ -240,7 +273,7 @@ html:not(.dark) [img-dark] {
 
 /* Scientific typography & accents */
 body {
-  font-family: 'STIX Two Text', 'Computer Modern Roman', 'Times New Roman', 'Source Serif Pro', 'Charter', serif;
+  font-family: var(--font-text);
   letter-spacing: 0.01em;
   line-height: 1.65;
 }
@@ -252,13 +285,7 @@ h4,
 h5,
 h6,
 .font-heading {
-  font-family:
-    'Space Grotesk',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    sans-serif;
+  font-family: var(--font-display);
   letter-spacing: -0.015em;
 }
 
@@ -280,5 +307,5 @@ h6,
 code,
 pre,
 .font-mono {
-  font-family: 'DM Mono', 'JetBrains Mono', 'Fira Code', Menlo, monospace !important;
+  font-family: var(--font-mono) !important;
 }

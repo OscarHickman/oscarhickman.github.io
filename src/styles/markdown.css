@@ -88,6 +88,7 @@ html:not(.dark) .shiki span {
 .prose hr {
   width: 50px;
   margin: 2em auto;
+  border-color: var(--c-border);
 }
 
 html.dark .prose {

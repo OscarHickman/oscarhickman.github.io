@@ -13,7 +13,7 @@ const { y: scroll } = useWindowScroll()
   <header class="header z-40">
     <div class="home-button absolute xl:fixed m-5 flex items-center gap-3">
       <RouterLink
-        class="w-12 h-12 select-none outline-none"
+        class="w-12 h-12 select-none rounded"
         to="/"
         focusable="false"
         title="Home"
@@ -89,11 +89,7 @@ const { y: scroll } = useWindowScroll()
   display: grid;
   grid-template-columns: auto max-content;
   box-sizing: border-box;
-  font-family:
-    'Space Grotesk',
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
+  font-family: var(--font-display);
   letter-spacing: 0.02em;
 }
 
@@ -111,7 +107,6 @@ const { y: scroll } = useWindowScroll()
   color: inherit;
   transition: all 0.2s ease;
   opacity: 0.7;
-  outline: none;
 }
 
 .nav a:hover,

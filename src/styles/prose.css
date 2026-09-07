@@ -11,7 +11,7 @@
   line-height: 1.75;
 }
 .prose [class~='lead'] {
-  color: #4b5563;
+  color: var(--fg-light);
   font-size: 1.25em;
   line-height: 1.6;
   margin-top: 1.2em;
@@ -61,7 +61,7 @@
   content: counter(list-item, var(--list-counter-style, decimal)) '.';
   position: absolute;
   font-weight: 400;
-  color: #6b7280;
+  color: var(--fg-light);
   left: 0;
 }
 .prose ul > li {
@@ -71,7 +71,7 @@
 .prose ul > li::before {
   content: '';
   position: absolute;
-  background-color: #d1d5db;
+  background-color: var(--fg-light);
   border-radius: 50%;
   width: 0.375em;
   height: 0.375em;
@@ -133,7 +133,7 @@
   line-height: 1.5;
 }
 .prose figure figcaption {
-  color: #6b7280;
+  color: var(--fg-light);
   font-size: 0.875em;
   line-height: 1.4285714;
   margin-top: 0.8571429em;
