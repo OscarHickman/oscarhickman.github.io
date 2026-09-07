@@ -70,7 +70,7 @@ const { y: scroll } = useWindowScroll()
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   background: color-mix(in srgb, var(--c-bg) 85%, transparent);
-  transition: border-color 0.3s ease;
+  transition: border-color var(--dur-slow) var(--ease);
 }
 
 .header h1 {
@@ -105,7 +105,7 @@ const { y: scroll } = useWindowScroll()
   cursor: pointer;
   text-decoration: none;
   color: inherit;
-  transition: all 0.2s ease;
+  transition: all var(--dur-fast) var(--ease);
   opacity: 0.7;
 }
 

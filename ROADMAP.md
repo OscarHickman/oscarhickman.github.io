@@ -94,15 +94,15 @@ _Nothing else is worth doing until the site renders as designed._
 
 Create `src/styles/tokens.css`, imported first. Everything downstream references it; **no raw hex, px or ms lands in a component again.**
 
-- [ ] **Colour** — semantic, not literal: `--bg`, `--bg-raised`, `--bg-sunken`, `--fg`, `--fg-muted`, `--fg-subtle`, `--border`, `--border-strong`, `--accent`, `--accent-hover`, `--accent-muted`, `--focus`.
-- [ ] **Spectral ramp** — `--spec-o` … `--spec-m`, promoted from `ArtDots.vue`'s `STAR_COLORS`, used for category accents, tags and data viz.
-- [ ] **Space** — a 4 px base: `--s-1`(4) … `--s-12`(96). No arbitrary values in components.
-- [ ] **Type scale** — `--t-xs` … `--t-4xl` on a ~1.2 ratio, with paired `line-height` and `letter-spacing` tokens (tracking tightens as size grows).
-- [ ] **Radius** — `--r-sm`(4) `--r-md`(8) `--r-lg`(12) `--r-full`.
-- [ ] **Elevation** — `--e-1`, `--e-2`, `--e-glow` (the accent glow currently inline in `ListProjects.vue`).
-- [ ] **Motion** — `--dur-fast`(120ms) `--dur-slow`(400ms) `--ease`(`cubic-bezier(0.16,1,0.3,1)`).
-- [ ] **Z-index** — a named scale replacing the current `z-40`/`z-100`/`z-200`/`1031` free-for-all.
-- [ ] Mirror the tokens into `unocss.config.ts` `theme` so `bg-raised`, `text-muted`, `p-4` etc. resolve to the same values from utility classes.
+- [x] **Colour** — semantic, not literal: `--bg`, `--bg-raised`, `--bg-sunken`, `--fg`, `--fg-muted`, `--fg-subtle`, `--border`, `--border-strong`, `--accent`, `--accent-hover`, `--accent-muted`, `--focus`.
+- [x] **Spectral ramp** — `--spec-o` … `--spec-m`, promoted from `ArtDots.vue`'s `STAR_COLORS`, used for category accents, tags and data viz.
+- [x] **Space** — a 4 px base: `--s-1`(4) … `--s-12`(96). No arbitrary values in components.
+- [x] **Type scale** — `--t-xs` … `--t-4xl` on a ~1.2 ratio, with paired `line-height` and `letter-spacing` tokens (tracking tightens as size grows).
+- [x] **Radius** — `--r-sm`(4) `--r-md`(8) `--r-lg`(12) `--r-full`.
+- [x] **Elevation** — `--e-1`, `--e-2`, `--e-glow` (the accent glow currently inline in `ListProjects.vue`).
+- [x] **Motion** — `--dur-fast`(120ms) `--dur-slow`(400ms) `--ease`(`cubic-bezier(0.16,1,0.3,1)`).
+- [x] **Z-index** — a named scale replacing the current `z-40`/`z-100`/`z-200`/`1031` free-for-all.
+- [x] Mirror the tokens into `unocss.config.ts` `theme` so `bg-raised`, `text-muted`, `p-4` etc. resolve to the same values from utility classes.
 
 **Done when:** `grep -rE '#[0-9a-f]{6}' src/components` returns nothing, and every `transition` in the codebase references `--dur-*`/`--ease`.
 

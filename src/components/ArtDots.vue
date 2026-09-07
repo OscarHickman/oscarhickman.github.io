@@ -18,11 +18,11 @@ const stars: Star[] = []
 
 // Realistic stellar spectral colours (hot O/B blue-white, A/F white, G/K warm white, rare amber)
 const STAR_COLORS = [
-  '#e2ecff', // O/B blue-white
-  '#f8faff', // A white
-  '#ffffff', // Pure white
-  '#fff6e8', // F/G warm white
-  '#ffdca8', // K light orange
+  '#93c5fd', // O/B blue-white (--spec-o)
+  '#bae6fd', // B blue (--spec-b)
+  '#f8fafc', // A white (--spec-a)
+  '#fde047', // G warm white (--spec-g)
+  '#fbbf24', // K light orange (--spec-k)
 ]
 
 function initStars(width: number, height: number) {

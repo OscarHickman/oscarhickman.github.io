@@ -164,7 +164,7 @@ function formatRange(start: string, end?: string) {
 }
 
 .badge-upcoming {
-  padding: 0.125rem 0.5rem;
+  padding: calc(var(--s-1) / 2) var(--s-2);
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -172,7 +172,7 @@ function formatRange(start: string, end?: string) {
   background-color: var(--c-accent-glow);
   color: var(--c-accent);
   border: 1px solid var(--c-border);
-  border-radius: 4px;
+  border-radius: var(--r-sm);
 }
 
 .talk-date {

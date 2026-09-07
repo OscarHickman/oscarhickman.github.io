@@ -49,22 +49,22 @@ function slug(name: string) {
 .project-card {
   display: flex;
   flex-direction: column;
-  padding: 1.35rem;
-  border-radius: 8px;
-  border: 1px solid var(--c-border);
-  background: color-mix(in srgb, var(--c-bg) 75%, transparent);
+  padding: var(--s-5);
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 75%, transparent);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all var(--dur-slow) var(--ease);
   text-decoration: none;
   color: inherit;
 }
 
 .project-card:hover {
-  border-color: var(--c-accent);
+  border-color: var(--accent);
   box-shadow:
-    0 4px 20px var(--c-accent-glow),
-    0 0 0 1px var(--c-accent);
+    var(--e-glow),
+    0 0 0 1px var(--accent);
   transform: translateY(-2px);
 }
 
@@ -87,12 +87,12 @@ function slug(name: string) {
 .tag {
   display: inline-block;
   padding: 0.2rem 0.5rem;
-  border-radius: 4px;
+  border-radius: var(--r-sm);
   background: color-mix(in srgb, var(--c-accent) 12%, transparent);
   color: var(--c-accent);
   border: 1px solid color-mix(in srgb, var(--c-accent) 25%, transparent);
   font-size: 0.72rem;
-  font-family: 'DM Mono', monospace;
+  font-family: var(--font-mono);
   font-weight: 500;
   letter-spacing: 0.02em;
 }
