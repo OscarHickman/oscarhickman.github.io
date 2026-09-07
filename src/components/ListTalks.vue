@@ -65,31 +65,31 @@ function daysLeft(date: string) {
               </div>
             </div>
             <div flex="~ gap-3 justify-end items-center">
-              <a v-if="p.recording" :href="p.recording" target="_blank" rel="noopener noreferrer" op50 hover:op100 important-transition-opacity duration-500 important-border-0>
-                <div i-ri-play-large-line />
+              <Link v-if="p.recording" :href="p.recording" external>
+                <div i-ri-play-large-line class="mr-1" />
                 Watch
-              </a>
-              <a v-if="p.transcript" :href="p.transcript" target="_blank" rel="noopener noreferrer" op50 hover:op100 important-transition-opacity duration-500 important-border-0>
-                <div i-ri-file-list-3-line />
+              </Link>
+              <Link v-if="p.transcript" :href="p.transcript" external>
+                <div i-ri-file-list-3-line class="mr-1" />
                 Transcript
-              </a>
-              <a v-if="p.spa" :href="p.spa" target="_blank" rel="noopener noreferrer" op50 hover:op100 important-transition-opacity duration-500 important-border-0>
-                <div i-ri-presentation-fill />
+              </Link>
+              <Link v-if="p.spa" :href="p.spa" external>
+                <div i-ri-presentation-fill class="mr-1" />
                 Slides
-              </a>
-              <a v-if="p.pdf" :href="p.pdf" target="_blank" rel="noopener noreferrer" op50 hover:op100 important-transition-opacity duration-500 important-border-0>
-                <div i-ri-download-2-line />
+              </Link>
+              <Link v-if="p.pdf" :href="p.pdf" external>
+                <div i-ri-download-2-line class="mr-1" />
                 PDF
-              </a>
-              <a
-                v-if="isFuture(p.date)" :href="p.conferenceUrl" target="_blank"
-                rel="noopener noreferrer"
-                op50 hover:op100 important-transition-opacity duration-500 important-border-0
-                font-serif bg-gray:15 px2 rounded font-bold mr--2
+              </Link>
+              <Link
+                v-if="isFuture(p.date)"
+                :href="p.conferenceUrl"
+                external
               >
-                <div i-ri-time-line />
-                in {{ daysLeft(p.date) }} days
-              </a>
+                <Tag spectral="k">
+                  in {{ daysLeft(p.date) }} days
+                </Tag>
+              </Link>
             </div>
           </template>
         </template>

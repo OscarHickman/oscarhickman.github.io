@@ -54,6 +54,7 @@ export default defineConfig({
       'bg-base': 'bg-[var(--bg)]',
       'color-base': 'text-[var(--fg)]',
       'border-base': 'border-[var(--border)]',
+      'card-surface': 'bg-[color-mix(in_srgb,var(--bg)_75%,transparent)] border border-[var(--border)] rounded-[var(--r-md)] p-[var(--s-5)] backdrop-blur-sm',
     },
     [/^btn-(\w+)$/, ([_, color]) => `op50 px2.5 py1 transition-all duration-200 ease-out no-underline! hover:(op100 text-${color} bg-${color}/10) border border-base! rounded`],
   ],

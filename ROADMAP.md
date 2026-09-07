@@ -123,13 +123,13 @@ Create `src/styles/tokens.css`, imported first. Everything downstream references
 
 Build the small set of primitives every page currently re-implements, as `src/components/ui/`.
 
-- [ ] `Card.vue` — one hover/focus/active treatment, replacing the bespoke `.project-card` styles.
-- [ ] `Tag.vue` — spectral-ramp variants, replacing `.tag` in `ListProjects.vue`.
-- [ ] `Section.vue` — heading + rule + consistent top margin, replacing the ad-hoc `mt-16` / `border-b` pattern.
-- [ ] `Link.vue` — external/internal/anchor variants with the arrow affordance and correct `rel`.
-- [ ] `Meta.vue` — the mono metadata line (dates, venues, arXiv ids) used by talks, papers and notes.
-- [ ] Audit `ListProjects`, `ListTalks`, `ListTalksByCategory`, `ListPublications`, `ListPosts` and refactor onto the primitives; they currently diverge in padding, radius and hover behaviour.
-- [ ] Extend `unocss.config.ts` `shortcuts` with the resulting patterns so markdown pages can use them inline.
+- [x] `Card.vue` — one hover/focus/active treatment, replacing the bespoke `.project-card` styles.
+- [x] `Tag.vue` — spectral-ramp variants, replacing `.tag` in `ListProjects.vue`.
+- [x] `Section.vue` — heading + rule + consistent top margin, replacing the ad-hoc `mt-16` / `border-b` pattern.
+- [x] `Link.vue` — external/internal/anchor variants with the arrow affordance and correct `rel`.
+- [x] `Meta.vue` — the mono metadata line (dates, venues, arXiv ids) used by talks, papers and notes.
+- [x] Audit `ListProjects`, `ListTalks`, `ListTalksByCategory`, `ListPublications`, `ListPosts` and refactor onto the primitives; they currently diverge in padding, radius and hover behaviour.
+- [x] Extend `unocss.config.ts` `shortcuts` with the resulting patterns so markdown pages can use them inline.
 
 ---
 
