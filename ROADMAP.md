@@ -147,11 +147,11 @@ Build the small set of primitives every page currently re-implements, as `src/co
 
 ### Phase 6 — Motion & the starfield
 
-- [ ] Gate `ArtDots.vue` behind `prefers-reduced-motion` and pause it on `document.hidden` / `IntersectionObserver`.
-- [ ] Cap the frame rate and star count on low-DPI and small viewports; profile against a mid-range laptop, not a workstation.
-- [ ] Unify every remaining transition on the two duration tokens.
-- [ ] Consider replacing the generic starfield with something _specific to the work_: a slowly rotating projection of large-scale structure, or a cosmic-web filament field driven by the existing `simplex-noise` dependency. This is the single highest-leverage identity move on the site — it turns decoration into a statement of what the site is about.
-- [ ] Page transitions: one consistent enter, no exit animation (exit animations always read as lag).
+- [x] Gate `ArtDots.vue` behind `prefers-reduced-motion` and pause it on `document.hidden` / `IntersectionObserver`.
+- [x] Cap the frame rate and star count on low-DPI and small viewports; profile against a mid-range laptop, not a workstation.
+- [x] Unify every remaining transition on the two duration tokens.
+- [x] Consider replacing the generic starfield with something _specific to the work_: a slowly rotating projection of large-scale structure, or a cosmic-web filament field driven by the existing `simplex-noise` dependency. This is the single highest-leverage identity move on the site — it turns decoration into a statement of what the site is about.
+- [x] Page transitions: one consistent enter, no exit animation (exit animations always read as lag).
 
 ---
 
