@@ -171,12 +171,12 @@ Treat as a gate, not a phase to skip.
 
 ### Phase 8 — Performance & production polish
 
-- [ ] Font subsetting (Latin + the maths/Greek glyphs a cosmology site actually needs) and preloading; target **zero layout shift** from font swap.
-- [ ] Lighthouse budget in CI: Performance ≥ 95, Accessibility 100, Best Practices 100, SEO 100, CLS < 0.05.
-- [ ] Audit the `pixi.js` / `d3` / `matter` dependencies — if the demos that needed them are gone, the bundle shouldn't carry them.
-- [ ] Print stylesheet (academics print pages; publications and talks should print cleanly).
-- [ ] OG images: verify the generated template matches the new type system.
-- [ ] Meta completeness: canonical URLs, `article` structured data on notes, `ScholarlyArticle` JSON-LD on publications.
+- [x] Font subsetting (Latin + the maths/Greek glyphs a cosmology site actually needs) and preloading; target **zero layout shift** from font swap.
+- [x] Lighthouse budget in CI: Performance ≥ 95, Accessibility 100, Best Practices 100, SEO 100, CLS < 0.05.
+- [x] Audit the `pixi.js` / `d3` / `matter` dependencies — if the demos that needed them are gone, the bundle shouldn't carry them.
+- [x] Print stylesheet (academics print pages; publications and talks should print cleanly).
+- [x] OG images: verify the generated template matches the new type system.
+- [x] Meta completeness: canonical URLs, `article` structured data on notes, `ScholarlyArticle` JSON-LD on publications.
 
 ---
 

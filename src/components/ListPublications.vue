@@ -39,6 +39,31 @@ async function copyBibtex(pub: typeof publications[0]) {
 function toggleBibtex(title: string) {
   expandedBibtex.value = expandedBibtex.value === title ? null : title
 }
+
+// Structured data for search engines & academic indexing
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': publications.map(p => ({
+          '@type': 'ScholarlyArticle',
+          'headline': p.title,
+          'name': p.title,
+          'author': p.authors.split(',').map(a => ({
+            '@type': 'Person',
+            'name': a.trim(),
+          })),
+          'datePublished': String(p.year),
+          ...(p.venue ? { publication: { '@type': 'Periodical', 'name': p.venue } } : {}),
+          ...(p.arxiv ? { sameAs: `https://arxiv.org/abs/${p.arxiv}` } : {}),
+          ...(p.doi ? { identifier: p.doi } : {}),
+        })),
+      }),
+    },
+  ],
+})
 </script>
 
 <template>

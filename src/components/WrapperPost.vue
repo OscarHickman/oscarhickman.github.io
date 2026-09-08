@@ -87,6 +87,31 @@ const ArtComponent = computed(() => {
   }
   return undefined
 })
+
+if (frontmatter.date) {
+  useHead({
+    script: [
+      {
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          'headline': frontmatter.display || frontmatter.title,
+          'datePublished': frontmatter.date,
+          'author': {
+            '@type': 'Person',
+            'name': 'Oscar Hickman',
+            'url': base,
+          },
+          'publisher': {
+            '@type': 'Person',
+            'name': 'Oscar Hickman',
+          },
+        }),
+      },
+    ],
+  })
+}
 </script>
 
 <template>

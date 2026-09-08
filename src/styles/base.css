@@ -200,3 +200,44 @@ html:not(.dark) [img-dark] {
     --enter-stage: 20 !important;
   }
 }
+
+/* Academic print stylesheet */
+@media print {
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .header,
+  .footer,
+  canvas,
+  .print\:hidden,
+  button,
+  .home-button,
+  .nav {
+    display: none !important;
+  }
+
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .prose {
+    max-width: 100% !important;
+    color: #000000 !important;
+  }
+
+  a {
+    color: #000000 !important;
+    text-decoration: underline !important;
+  }
+
+  .publication-item,
+  .card-root {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}

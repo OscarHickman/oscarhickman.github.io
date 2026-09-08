@@ -2,7 +2,7 @@
   viewBox="0 0 1200 675">
   <g clip-path="url(#clip0_402_22)">
     <rect width="1200" height="675" fill="url(#pattern0)" /><text fill="#fff" xml:space="preserve"
-      style="white-space:pre" font-family="Inter" font-size="50" letter-spacing="0em">
+      style="white-space:pre" font-family="Space Grotesk, sans-serif" font-size="50" letter-spacing="0em">
       <tspan x="274" y="382.898">{{line1}}</tspan>
       <tspan x="274" y="465">{{line2}}</tspan>
     </text>
