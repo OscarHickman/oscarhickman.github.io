@@ -159,13 +159,13 @@ Build the small set of primitives every page currently re-implements, as `src/co
 
 Treat as a gate, not a phase to skip.
 
-- [ ] `:focus-visible` ring on every interactive element, using `--focus`; remove the `outline: none` in `NavBar.vue`.
-- [ ] Verify contrast: all body text ≥ 4.5:1, large text and UI ≥ 3:1 against the actual dark ground. The current `--c-fg-muted: #94a3b8` on `#060913` needs measuring, and the imported greys in `prose.css` certainly fail.
-- [ ] Skip-to-content link.
-- [ ] Semantic landmarks (`<main>` exists; add `<nav aria-label>`, `<footer>`), heading-order audit per page.
-- [ ] `alt` text on every photo (the `.json` sidecars already carry `text` — wire it through).
-- [ ] Keyboard trap check in the image modal; `aria-modal`, focus return on close.
-- [ ] Run axe-core against every route in CI.
+- [x] `:focus-visible` ring on every interactive element, using `--focus`; remove the `outline: none` in `NavBar.vue`.
+- [x] Verify contrast: all body text ≥ 4.5:1, large text and UI ≥ 3:1 against the actual dark ground. The current `--c-fg-muted: #94a3b8` on `#060913` needs measuring, and the imported greys in `prose.css` certainly fail.
+- [x] Skip-to-content link.
+- [x] Semantic landmarks (`<main>` exists; add `<nav aria-label>`, `<footer>`), heading-order audit per page.
+- [x] `alt` text on every photo (the `.json` sidecars already carry `text` — wire it through).
+- [x] Keyboard trap check in the image modal; `aria-modal`, focus return on close.
+- [x] Run axe-core against every route in CI.
 
 ---
 

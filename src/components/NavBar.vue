@@ -30,7 +30,7 @@ const { y: scroll } = useWindowScroll()
     >
       <div i-ri-arrow-up-line />
     </button>
-    <nav class="nav">
+    <nav class="nav" aria-label="Main navigation">
       <div class="spacer" />
       <div class="right" print:op0>
         <RouterLink to="/papers" title="Papers">

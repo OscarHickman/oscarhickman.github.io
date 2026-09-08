@@ -58,6 +58,7 @@
     "@vitejs/plugin-vue": "catalog:build",
     "@vue/test-utils": "catalog:dev",
     "ansis": "catalog:dev",
+    "axe-core": "catalog:dev",
     "blurhash": "catalog:dev",
     "cross-env": "catalog:dev",
     "diacritics": "catalog:dev",

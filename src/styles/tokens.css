@@ -82,10 +82,10 @@ html:not(.dark) {
   --fg-subtle: #94a3b8;
   --border: rgba(15, 23, 42, 0.12);
   --border-strong: rgba(15, 23, 42, 0.25);
-  --accent: #0284c7;
-  --accent-hover: #0369a1;
-  --accent-muted: rgba(2, 132, 199, 0.12);
-  --accent-glow: rgba(2, 132, 199, 0.15);
+  --accent: #0369a1;
+  --accent-hover: #075985;
+  --accent-muted: rgba(3, 105, 161, 0.12);
+  --accent-glow: rgba(3, 105, 161, 0.15);
   --focus: var(--accent);
   --scrollbar: #cbd5e1;
   --scrollbar-hover: #94a3b8;

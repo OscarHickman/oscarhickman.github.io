@@ -21,6 +21,7 @@ function toggleView() {
   <div flex="~ gap-1 col items-center justify-center" absolute sm:fixed left-6 top-20>
     <button
       title="Switch view"
+      aria-label="Switch photo grid view"
       rounded-full p2 op20 hover="op100 bg-#8881"
       @click="toggleView"
     >

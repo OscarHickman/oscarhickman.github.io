@@ -50,6 +50,18 @@ function prevPhoto() {
     setImageModel(prevImg)
 }
 
+let triggerElement: HTMLElement | null = null
+
+function closeImageModel() {
+  imageModel.value = undefined
+  nextTick(() => {
+    if (triggerElement && typeof triggerElement.focus === 'function') {
+      triggerElement.focus()
+      triggerElement = null
+    }
+  })
+}
+
 useEventListener('click', async (e) => {
   const path = Array.from(e.composedPath())
   const first = path[0] as HTMLImageElement
@@ -71,6 +83,7 @@ useEventListener('click', async (e) => {
   if (pos.left !== newPos.left || pos.top !== newPos.top)
     return
 
+  triggerElement = first
   setImageModel(first)
 })
 
@@ -90,23 +103,32 @@ onKeyStroke('ArrowLeft', (e) => {
 
 onKeyStroke('Escape', (e) => {
   if (imageModel.value) {
-    imageModel.value = undefined
+    closeImageModel()
     e.preventDefault()
   }
 })
 </script>
 
 <template>
+  <a
+    href="#main-content"
+    class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[var(--bg-raised)] focus:text-[var(--accent)] focus:border focus:border-[var(--accent)] focus:rounded focus:shadow-lg focus:font-mono focus:text-sm"
+  >
+    Skip to main content
+  </a>
   <NavBar />
-  <main class="px-7 py-10 of-x-hidden">
+  <main id="main-content" class="px-7 py-10 of-x-hidden" tabindex="-1">
     <RouterView />
     <Footer :key="route.path" />
   </main>
   <Transition name="fade">
     <div
       v-if="imageModel"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Image preview modal"
       class="fixed inset-0 z-500 backdrop-blur-md bg-black:80 flex flex-col justify-between p-4 sm:p-6 select-none"
-      @click="imageModel = undefined"
+      @click="closeImageModel()"
     >
       <!-- Top chrome: counter & close button -->
       <div class="flex items-center justify-between z-10" @click.stop>
@@ -118,7 +140,8 @@ onKeyStroke('Escape', (e) => {
           type="button"
           class="text-white/70 hover:text-white p-2 rounded-full hover:bg-white/10 transition"
           title="Close (Esc)"
-          @click="imageModel = undefined"
+          aria-label="Close image preview"
+          @click="closeImageModel()"
         >
           <div i-ri-close-line class="text-xl" />
         </button>
