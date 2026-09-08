@@ -477,6 +477,17 @@ The build process regenerates OG images and all static output, so only source ne
 
 ---
 
-_Last updated: May 2026_
-_Updated Logo to "Orbit & Axis" Uppercase Monogram_
-_This summary is designed to help AI agents quickly understand the project structure, tooling, and conventions._
+## Pre-Merge Quality & Governance Checklist
+
+Before merging any pull request or declaring a frontend milestone complete, verify all items:
+
+1. **Tokens Only:** No raw hex codes (`#xxxxxx`), raw `px`, or raw `ms` in `src/components/**` or `pages/**`. Everything must resolve against `--bg`, `--fg`, `--border`, `--accent`, `--spec-*`, `--s-*`, `--dur-*`, `--ease`.
+2. **Focus State Present:** Every interactive control (links, buttons, inputs) must have a visible `:focus-visible` ring using `var(--focus)`. Never set `outline: none` without providing an accessible alternative.
+3. **Reduced Motion Honoured:** All dynamic animations and procedural canvas loops (such as `ArtDots.vue`) must check `prefers-reduced-motion: reduce` and pause execution when `document.hidden` is true.
+4. **Contrast Hardened:** Normal text must meet WCAG AA contrast (≥ 4.5:1), and UI controls/large text must meet (≥ 3:1) in both light and dark modes.
+5. **Empirical Verification:** Run `pnpm lint`, `pnpm test`, and `pnpm build` with zero errors. Run axe-core accessibility evaluations on rendered routes.
+
+---
+
+_Last updated: September 2026_
+_Updated Design System, Typography, Accessibility and Governance architecture_

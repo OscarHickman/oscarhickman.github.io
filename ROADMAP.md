@@ -182,11 +182,11 @@ Treat as a gate, not a phase to skip.
 
 ### Phase 9 — Governance (so it stays production-grade)
 
-- [ ] `docs/DESIGN.md` — the token reference, type scale, spacing rhythm and component inventory, with rationale. One page, not a wiki.
-- [ ] A `/styleguide` route (dev-only) rendering every token, type step and component state on one page. This is what makes drift visible.
-- [ ] Stylelint rule (or an ESLint custom rule) banning raw hex, raw px and raw ms in `src/components/**`.
-- [ ] Extend the existing Vitest suite with snapshot tests for the UI primitives; add Playwright visual-regression on the key routes.
-- [ ] A pre-merge checklist in `CLAUDE.md`: tokens only, focus state present, reduced-motion honoured, contrast checked.
+- [x] `docs/DESIGN.md` — the token reference, type scale, spacing rhythm and component inventory, with rationale. One page, not a wiki.
+- [x] A `/styleguide` route (dev-only) rendering every token, type step and component state on one page. This is what makes drift visible.
+- [x] Stylelint rule (or an ESLint custom rule) banning raw hex, raw px and raw ms in `src/components/**`.
+- [x] Extend the existing Vitest suite with snapshot tests for the UI primitives; add Playwright visual-regression on the key routes.
+- [x] A pre-merge checklist in `CLAUDE.md`: tokens only, focus state present, reduced-motion honoured, contrast checked.
 
 ---
 

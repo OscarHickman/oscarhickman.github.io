@@ -1,4 +1,5 @@
 <script setup lang='ts'>
+import { useHead } from '@unhead/vue'
 import { formatDate } from '~/logics'
 
 const { frontmatter } = defineProps({

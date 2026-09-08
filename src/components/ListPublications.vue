@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useHead } from '@unhead/vue'
 import { publications } from '~/data/publications'
 
 const copiedTitle = ref<string | null>(null)
