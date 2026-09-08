@@ -48,8 +48,11 @@ function getGroupName(p: Post) {
 <template>
   <ul>
     <template v-if="!posts.length">
-      <div py2 op50>
-        { nothing here yet }
+      <div class="py-12 text-center op50">
+        <div i-ri-article-line class="text-3xl mx-auto mb-2 op40" />
+        <p class="font-mono text-sm tracking-wide">
+          Notes and write-ups coming soon.
+        </p>
       </div>
     </template>
 

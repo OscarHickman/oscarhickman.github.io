@@ -97,20 +97,20 @@ function formatRange(start: string, end?: string) {
                   <!-- Links -->
                   <div flex="~ gap-4 wrap" mt5>
                     <Link v-if="p.pdf" :href="p.pdf" external>
-                      <div i-ri-file-pdf-line class="text-lg mr-1" />
+                      <div i-ri-file-pdf-line class="text-base mr-1" />
                       Slides
                     </Link>
                     <Link v-if="p.recording" :href="p.recording" external>
-                      <div i-ri-video-fill class="text-lg mr-1" />
+                      <div i-ri-video-fill class="text-base mr-1" />
                       Recording
                     </Link>
                     <Link v-if="p.transcript" :href="p.transcript" external>
-                      <div i-ri-file-text-line class="text-lg mr-1" />
+                      <div i-ri-file-text-line class="text-base mr-1" />
                       Transcript
                     </Link>
                   </div>
 
-                  <div v-if="isFuture(p.date)" mt4 text-sm op70>
+                  <div v-if="isFuture(p.date)" mt3 text-xs font-mono op70 class="text-[var(--accent)]">
                     In {{ daysLeft(p.date) }} days
                   </div>
                 </div>
@@ -125,12 +125,8 @@ function formatRange(start: string, end?: string) {
 
 <style scoped>
 .talk-abstract {
-  background-color: color-mix(in srgb, var(--bg) 85%, white);
+  background-color: var(--bg-sunken);
   border: 1px solid var(--border);
   border-left: 3px solid var(--accent);
-}
-
-html.dark .talk-abstract {
-  background-color: color-mix(in srgb, var(--bg) 80%, transparent);
 }
 </style>

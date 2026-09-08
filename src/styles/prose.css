@@ -6,24 +6,15 @@
 }
 
 .prose {
-  --fg-light: #64748b;
-  --fg: #334155;
-  --fg-deep: #0f172a;
-  --fg-deeper: #020617;
+  --fg-light: var(--fg-muted);
+  --fg: var(--fg);
+  --fg-deep: var(--fg);
+  --fg-deeper: var(--fg);
 
   color: var(--fg);
   max-width: var(--prose-max-width);
   font-size: var(--t-base);
   line-height: var(--lh-relaxed);
-}
-
-html.dark .prose {
-  --fg-light: #94a3b8;
-  --fg: #e2e8f0;
-  --fg-deep: #f8fafc;
-  --fg-deeper: #ffffff;
-
-  color: var(--fg);
 }
 
 .prose [class~='lead'] {

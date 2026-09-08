@@ -1,9 +1,14 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   title?: string
   id?: string
   first?: boolean
+  spectral?: 'o' | 'b' | 'a' | 'f' | 'g' | 'k' | 'm'
 }>()
+
+const spectralColor = computed(() => {
+  return props.spectral ? `var(--spec-${props.spectral})` : 'var(--border)'
+})
 </script>
 
 <template>
@@ -12,7 +17,7 @@ defineProps<{
       <h2 class="section-title">
         {{ title }}
       </h2>
-      <div class="section-line" />
+      <div class="section-line" :style="{ background: spectral ? `linear-gradient(to right, ${spectralColor}, var(--border))` : 'var(--border)' }" />
     </div>
     <slot />
   </section>

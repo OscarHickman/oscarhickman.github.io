@@ -20,8 +20,12 @@ function formatDate(name: string) {
     <div v-for="photo, idx in photos" :key="idx" class="photo-container relative overflow-hidden group">
       <img
         :src="photo.url"
-        :alt="photo.text"
+        :alt="photo.text || photo.name"
         :data-photo-index="idx"
+        :data-photo-total="photos.length"
+        :data-date="formatDate(photo.name)"
+        :data-caption="photo.text || ''"
+        :data-exif="photo.exif ? [photo.exif.make, photo.exif.model].filter(Boolean).join(' ') : ''"
         :style="photo.blurhash && view !== 'contain' ? blurhashToGradientCssObject(photo.blurhash) as any : ''"
         loading="lazy"
         w-full

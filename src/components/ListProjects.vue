@@ -4,16 +4,24 @@ defineProps<{ projects: Record<string, any[]> }>()
 function slug(name: string) {
   return name.toLowerCase().replace(/[\s\\/]+/g, '-')
 }
+
+const categorySpectralMap: Record<string, 'o' | 'b' | 'a' | 'f' | 'g' | 'k' | 'm'> = {
+  'ML for Cosmology & Physics': 'b',
+  'Software & Applications': 'o',
+  'Hardware & Assembly': 'f',
+  'Academic & Publications': 'k',
+  'Web & Personal': 'm',
+}
 </script>
 
 <template>
-  <div class="prose m-auto max-w-4xl">
+  <div class="prose m-auto max-w-5xl">
     <template
       v-for="key, cidx in Object.keys(projects)"
       :key="key"
     >
-      <Section :id="slug(key)" :title="key" :first="cidx === 0">
-        <div class="project-grid" grid="~ cols-1 sm:cols-2 lg:cols-3 gap-5" mb12>
+      <Section :id="slug(key)" :title="key" :first="cidx === 0" :spectral="categorySpectralMap[key] || 'b'">
+        <div class="project-grid grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
           <Card
             v-for="item, idx in projects[key]"
             :key="idx"
@@ -27,7 +35,7 @@ function slug(name: string) {
               {{ item.desc }}
             </div>
             <div v-if="item.tags" class="project-tags mt-auto pt-3 flex flex-wrap gap-1">
-              <Tag v-for="tag in item.tags" :key="tag" spectral="b">
+              <Tag v-for="tag in item.tags" :key="tag" :spectral="categorySpectralMap[key] || 'b'">
                 {{ tag }}
               </Tag>
             </div>

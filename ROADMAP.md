@@ -135,13 +135,13 @@ Build the small set of primitives every page currently re-implements, as `src/co
 
 ### Phase 5 — Page-level design
 
-- [ ] **Home** — the strongest opportunity. Currently plain markdown paragraphs. Design a real above-the-fold: name, one-line positioning, affiliation, current research focus, and a restrained call to contact. Keep it text-first; resist a hero image.
-- [ ] **Publications** — this is the page an academic visitor came for. Design it properly: highlight state for first-author work, arXiv/DOI/PDF/BibTeX affordances, year grouping, copy-citation action. Currently an empty array behind an unstyled list.
-- [ ] **Projects** — group headings need hierarchy beyond an underline; consider a spectral accent per category and a denser two-column layout at `lg`.
-- [ ] **Talks** — a timeline treatment; recording/slides/transcript as consistent icon affordances.
-- [ ] **Notes** — a proper reading layout: measure, drop-cap or lede treatment, sticky TOC (the current fixed TOC at `markdown.css` is fragile), reading time, prev/next.
-- [ ] **Photos** — respect the existing blurhash pipeline; add a real lightbox chrome (caption, EXIF, counter) around `App.vue`'s existing keyboard navigation.
-- [ ] **404 and empty states** — currently unstyled; every list component needs an intentional empty state.
+- [x] **Home** — the strongest opportunity. Currently plain markdown paragraphs. Design a real above-the-fold: name, one-line positioning, affiliation, current research focus, and a restrained call to contact. Keep it text-first; resist a hero image.
+- [x] **Publications** — this is the page an academic visitor came for. Design it properly: highlight state for first-author work, arXiv/DOI/PDF/BibTeX affordances, year grouping, copy-citation action. Currently an empty array behind an unstyled list.
+- [x] **Projects** — group headings need hierarchy beyond an underline; consider a spectral accent per category and a denser two-column layout at `lg`.
+- [x] **Talks** — a timeline treatment; recording/slides/transcript as consistent icon affordances.
+- [x] **Notes** — a proper reading layout: measure, drop-cap or lede treatment, sticky TOC (the current fixed TOC at `markdown.css` is fragile), reading time, prev/next.
+- [x] **Photos** — respect the existing blurhash pipeline; add a real lightbox chrome (caption, EXIF, counter) around `App.vue`'s existing keyboard navigation.
+- [x] **404 and empty states** — currently unstyled; every list component needs an intentional empty state.
 
 ---
 
