@@ -1,12 +1,12 @@
 {
   "name": "Oscar Hickman",
   "short_name": "Oscar Hickman",
-  "description": "Machine Learning Cosmology | Oscar Hickman",
+  "description": "Oscar Hickman, cosmology researcher at Durham University",
   "start_url": "/",
   "display": "browser",
   "icons": [
     {
-      "src": "/apple-touch-icon.png",
+      "src": "/icon-180.png",
       "sizes": "180x180",
       "type": "image/png"
     }

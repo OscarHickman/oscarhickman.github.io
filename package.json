@@ -3,7 +3,7 @@
   "private": true,
   "packageManager": "pnpm@10.19.0",
   "scripts": {
-    "build": "rimraf dist && cross-env NODE_ENV=production vite-ssg build && tsx ./scripts/copy-fonts.ts && tsx ./scripts/generate-sitemap.ts && cp _dist_redirects dist/_redirects",
+    "build": "rimraf dist && cross-env NODE_ENV=production vite-ssg build && tsx ./scripts/copy-fonts.ts && tsx ./scripts/copy-og.ts && tsx ./scripts/generate-sitemap.ts && cp _dist_redirects dist/_redirects",
     "dev": "vite --port 3333 --open",
     "preview": "vite preview",
     "redirects": "tsx scripts/redirects.ts",

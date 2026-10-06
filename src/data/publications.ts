@@ -11,20 +11,4 @@ export interface Publication {
   firstAuthor?: boolean
 }
 
-export const publications: Publication[] = [
-  {
-    title: 'Fast, Unbiased Galaxy Clustering Estimation from Sparse Merger Trees',
-    authors: 'Oscar Hickman, et al.',
-    year: 2026,
-    venue: 'Monthly Notices of the Royal Astronomical Society (MNRAS)',
-    arxiv: '2605.12345',
-    highlight: true,
-    firstAuthor: true,
-    bibtex: `@article{hickman2026clustering,
-  title={Fast, Unbiased Galaxy Clustering Estimation from Sparse Merger Trees},
-  author={Hickman, Oscar and others},
-  journal={Monthly Notices of the Royal Astronomical Society},
-  year={2026}
-}`,
-  },
-]
+export const publications: Publication[] = []
