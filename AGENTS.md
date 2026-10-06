@@ -79,7 +79,7 @@ oscarhickman.io/
 │   │   ├── ListProjects.vue  # Grid of project cards
 │   │   ├── ListPublications.vue # Academic publications & preprints
 │   │   ├── WrapperPost.vue   # Layout wrapper for markdown posts
-│   │   ├── CosmicWeb.vue     # WebGL Zel'dovich cosmic-web background (mounted once in App.vue)
+│   │   ├── CosmicWeb.vue     # 3D WebGL fly-through of a Zel'dovich cosmic web (mounted once in App.vue)
 │   │   ├── YouTubeEmbed.vue  # Embeds YouTube videos
 │   │   ├── TalkDate.vue      # Talk date formatting
 │   │   ├── TextCopy.vue      # Copy-to-clipboard text
@@ -330,7 +330,7 @@ date: YYYY-MM-DD
 
 - **Unplugin Icons**: on-demand icon loading (Iconify sets)
 - **SVG loader**: inline SVG rendering
-- **Cosmic web background**: `CosmicWeb.vue` renders a 2D Zel'dovich-approximation realisation (maths in `src/logics/cosmic-web.ts`, tested in `tests/cosmic-web.test.ts`) with WebGL; full strength on `/`, dimmed elsewhere
+- **Cosmic web background**: `CosmicWeb.vue` flies a camera through a 3D Zel'dovich-approximation realisation in a periodic box. The field is generated in a Web Worker (`src/logics/cosmic-web.ts`, `cosmic-web.worker.ts`), the camera path and visible box copies come from `src/logics/cosmic-flight.ts`, and `src/logics/cosmic-web-renderer.ts` draws particles as crisp points into a half-float light buffer and tone-maps it with WebGL (stepping resolution down via `frame-budget.ts` on slow devices). Tests live in `tests/cosmic-web.test.ts` and `tests/cosmic-flight.test.ts`. Full strength on `/`, dimmed elsewhere; a still frame under reduced motion
 - **Physics demo**: Matter.js interactive simulator
 
 ## Deployment & Hosting
