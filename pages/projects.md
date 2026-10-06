@@ -1,17 +1,11 @@
 ---
 title: Projects - Oscar Hickman
 display: Projects
-description: All projects, from cosmology research to software applications.
-wrapperClass: 'text-center'
-art: dots
+description: Software and research code by Oscar Hickman.
 ---
 
 <script setup>
-import { projectCategories } from '~/data/projects'
-
-const projects = Object.fromEntries(
-  projectCategories.map(cat => [cat.name, cat.projects])
-)
+import { projects } from '~/data/projects'
 </script>
 
 <ListProjects :projects="projects" />

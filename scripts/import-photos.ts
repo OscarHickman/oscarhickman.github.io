@@ -119,7 +119,8 @@ async function processPhoto(filePath: string) {
   }
 
   const squareSize = Math.min(Math.max(width, height), MAX_SIZE)
-  const processedImage = sharp(buffer).resize(squareSize, squareSize, { fit: 'cover' })
+  // rotate() applies the EXIF orientation; without it phone portraits come out sideways
+  const processedImage = sharp(buffer).rotate().resize(squareSize, squareSize, { fit: 'cover' })
 
   const date = meta.date || new Date()
   const dateStr = date.toISOString().split('T')[0]

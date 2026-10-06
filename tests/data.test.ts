@@ -1,37 +1,26 @@
 import { describe, expect, it } from 'vitest'
 import photos from '../photos/data'
-import { projectCategories } from '../src/data/projects'
+import { projects } from '../src/data/projects'
+import { publications } from '../src/data/publications'
 
 describe('projects data', () => {
-  it('has valid structure', () => {
-    expect(Array.isArray(projectCategories)).toBe(true)
-    expect(projectCategories.length).toBeGreaterThan(0)
+  it('only lists public https links', () => {
+    expect(Array.isArray(projects)).toBe(true)
 
-    for (const category of projectCategories) {
-      expect(category.name).toBeDefined()
-      expect(Array.isArray(category.projects)).toBe(true)
-
-      for (const project of category.projects) {
-        expect(project.name).toBeDefined()
-        expect(project.link).toBeDefined()
-        expect(project.desc).toBeDefined()
-        expect(project.icon).toBeDefined()
-
-        // Ensure links are valid URLs
-        expect(project.link).toMatch(/^https?:\/\//)
-      }
+    for (const project of projects) {
+      expect(project.name).toBeTruthy()
+      expect(project.desc).toBeTruthy()
+      expect(project.link).toMatch(/^https:\/\//)
     }
   })
+})
 
-  it('contains the updated CMB project', () => {
-    const mlCategory = projectCategories.find(c => c.name === 'ML for Cosmology & Physics')
-    expect(mlCategory).toBeDefined()
-
-    const cmbProject = mlCategory!.projects.find(p => p.name === 'CMB Cosmology with Advanced Sampling')
-    expect(cmbProject).toBeDefined()
-    expect(cmbProject!.link).toBe('https://github.com/OscarHickman/CMB_Advanced_Sampling')
-    expect(cmbProject!.tags).toContain('Rust')
-    expect(cmbProject!.tags).toContain('TensorFlow Probability')
+describe('publications data', () => {
+  it('uses well-formed arXiv identifiers', () => {
+    for (const pub of publications) {
+      if (pub.arxiv)
+        expect(pub.arxiv).toMatch(/^\d{4}\.\d{4,5}$/)
+    }
   })
 })
 

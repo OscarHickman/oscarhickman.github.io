@@ -1,8 +1,7 @@
 ---
 title: Talks - Oscar Hickman
 display: Talks
-description: Public talks and presentations
-art: dots
+description: Talks and meetings by Oscar Hickman.
 ---
 
 <ListTalksByCategory />

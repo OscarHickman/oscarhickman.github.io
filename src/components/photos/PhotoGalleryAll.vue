@@ -18,10 +18,12 @@ function toggleView() {
 </script>
 
 <template>
-  <div flex="~ gap-1 col items-center justify-center" absolute sm:fixed left-6 top-20>
+  <div class="flex justify-end max-w-500 mx-auto mb-2">
     <button
+      type="button"
       title="Switch view"
-      rounded-full p2 op20 hover="op100 bg-#8881"
+      aria-label="Switch photo grid view"
+      rounded-full p2 op40 hover="op100 bg-[var(--bg-raised)]"
       @click="toggleView"
     >
       <div :class="galleryView === 'cover' ? 'i-ri-grid-line' : 'i-ri-layout-masonry-line'" />

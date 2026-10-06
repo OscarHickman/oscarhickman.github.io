@@ -1,0 +1,41 @@
+/* Third-party component and library overrides */
+
+/* Floating Vue */
+.v-popper--theme-dropdown .v-popper__inner,
+.v-popper--theme-tooltip .v-popper__inner {
+  --at-apply: bg-base color-base text-base rounded border border-base shadow;
+  box-shadow: 0 6px 30px #0000001a;
+}
+
+.v-popper--theme-tooltip .v-popper__arrow-inner,
+.v-popper--theme-dropdown .v-popper__arrow-inner {
+  visibility: visible;
+  --at-apply: border-white dark-border-black;
+}
+
+.v-popper--theme-tooltip .v-popper__arrow-outer,
+.v-popper--theme-dropdown .v-popper__arrow-outer {
+  --at-apply: border-base;
+}
+
+.v-popper--theme-tooltip.v-popper--shown,
+.v-popper--theme-tooltip.v-popper--shown * {
+  transition: none !important;
+}
+
+/* NProgress */
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  opacity: 0.85;
+  position: fixed;
+  z-index: var(--z-max);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}

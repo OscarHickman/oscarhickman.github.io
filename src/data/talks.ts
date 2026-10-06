@@ -41,7 +41,7 @@ export const talkCategories: TalkCategory[] = [
             time: '13:00',
             conference: 'FLAT Talk',
             location: 'Durham University',
-            room: 'OCW017 | The Ogden Center for Fundamental Physics (West) | Department of Physics | South Road | Durham | DH1 3LE | United Kingdom',
+            room: 'OCW017',
             abstract: `Galaxy clustering encodes rich information about the physical processes that govern the occupation of dark matter haloes - yet despite its sensitivity to these processes, clustering is rarely used as a direct constraint on physical models of galaxy formation. A key reason for this is computational: measuring clustering statistics for the large, simulated catalogues produced by semi-analytical and empirical models is expensive, making it impractical to include clustering in parameter calibration pipelines that must explore large parameter spaces.
 
 We present a general method with which clustering can be recovered accurately from a sparsely sampled galaxy catalogue, provided a suitable correction is applied to account for the reduced sampling rate. We demonstrate this by applying this method to GALFORM, run on the P-Millennium N-body simulation.

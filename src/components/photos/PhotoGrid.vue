@@ -7,21 +7,30 @@ defineProps<{
   view?: 'cover' | 'contain'
 }>()
 
+// Cameras with an unset clock report 2000-01-01, so treat that as unknown
+const UNKNOWN_DATE = '2000-01-01'
+// Parse and format the ISO day in UTC so it never shifts with the visitor's timezone
+const dateFormat = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
+
 function formatDate(name: string) {
-  const match = name.match(/p-(\d{4})-(\d{2})-(\d{2})/)
-  if (match)
-    return `${match[1]}-${match[2]}-${match[3]}`
-  return ''
+  const match = name.match(/p-(\d{4}-\d{2}-\d{2})/)
+  if (!match || match[1] === UNKNOWN_DATE)
+    return ''
+  return dateFormat.format(new Date(match[1]))
 }
 </script>
 
 <template>
-  <div class="photos grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" max-w-500 mx-auto>
+  <div class="photos grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4" max-w-500 mx-auto>
     <div v-for="photo, idx in photos" :key="idx" class="photo-container relative overflow-hidden group">
       <img
         :src="photo.url"
-        :alt="photo.text"
+        :alt="photo.text || photo.name"
         :data-photo-index="idx"
+        :data-photo-total="photos.length"
+        :data-date="formatDate(photo.name)"
+        :data-caption="photo.text || ''"
+        :data-exif="photo.exif ? [photo.exif.make, photo.exif.model].filter(Boolean).join(' ') : ''"
         :style="photo.blurhash && view !== 'contain' ? blurhashToGradientCssObject(photo.blurhash) as any : ''"
         loading="lazy"
         w-full

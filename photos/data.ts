@@ -2,6 +2,13 @@ export interface PhotoMate {
   text?: string
   lang?: string
   blurhash?: string
+  date?: string
+  location?: string
+  exif?: {
+    make?: string
+    model?: string
+    [key: string]: any
+  }
 }
 
 export interface Photo extends PhotoMate {

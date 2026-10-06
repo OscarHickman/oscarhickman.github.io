@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { talkCategories } from '~/data/talks'
-import { formatDate } from '../logics'
+
+const categories = talkCategories.filter(c => c.talks.length)
+
+// Dates are ISO calendar days, which parse as UTC midnight, so format in UTC
+// to stop visitors west of Greenwich seeing the previous day
+const dayMonthYear = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' })
+const day = new Intl.DateTimeFormat('en-GB', { day: 'numeric', timeZone: 'UTC' })
+const dayMonth = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' })
 
 function getSlug(title: string) {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+/g, '-')
@@ -10,186 +17,119 @@ function isFuture(date: string) {
   return +new Date(date) > +new Date()
 }
 
-function daysLeft(date: string) {
-  const diff = +new Date(date) - +new Date()
-  return Math.ceil(diff / (1000 * 60 * 60 * 24))
-}
-
-function formatRange(start: string, end?: string) {
-  if (!end || start === end)
-    return formatDate(start, true)
-
+function formatRange(start: string, end?: string, time?: string) {
   const s = new Date(start)
+  if (!end || start === end)
+    return time ? `${dayMonthYear.format(s)}, ${time}` : dayMonthYear.format(s)
+
   const e = new Date(end)
-
-  const formatter = new Intl.DateTimeFormat('en-GB', { day: 'numeric' })
-  const monthFormatter = new Intl.DateTimeFormat('en-GB', { month: 'short' })
-  const yearFormatter = new Intl.DateTimeFormat('en-GB', { year: 'numeric' })
-
-  if (s.getMonth() === e.getMonth() && s.getFullYear() === e.getFullYear()) {
-    return `${formatter.format(s)} – ${formatter.format(e)} ${monthFormatter.format(s)} ${yearFormatter.format(s)}`
-  }
-  else if (s.getFullYear() === e.getFullYear()) {
-    return `${formatter.format(s)} ${monthFormatter.format(s)} – ${formatter.format(e)} ${monthFormatter.format(e)} ${yearFormatter.format(s)}`
-  }
-
-  return `${formatDate(start, true)} – ${formatDate(end, true)}`
+  if (s.getUTCFullYear() !== e.getUTCFullYear())
+    return `${dayMonthYear.format(s)} – ${dayMonthYear.format(e)}`
+  if (s.getUTCMonth() !== e.getUTCMonth())
+    return `${dayMonth.format(s)} – ${dayMonthYear.format(e)}`
+  return `${day.format(s)}–${dayMonthYear.format(e)}`
 }
 </script>
 
 <template>
   <div class="prose m-auto">
-    <template v-for="category, catIdx in talkCategories" :key="category.name">
-      <div :id="getSlug(category.name)" :class="catIdx > 0 ? 'mt-16' : ''">
-        <h2 mb8 pb2 border-b border-base inline-block text-xl class="category-heading">
-          {{ category.name }}
-        </h2>
-
-        <div v-if="!category.talks.length" py8 text-center op50>
-          <p class="font-mono text-sm tracking-wide">
-            Coming soon...
-          </p>
-        </div>
-
-        <template v-for="talk, talkIdx in category.talks" :key="talk.title">
-          <div v-if="!talk.lang || talk.lang === 'en'" :class="talkIdx > 0 ? 'mt-12 pt-12 border-t talk-divider' : ''">
-            <template v-for="p, presIdx in talk.presentations" :key="presIdx">
-              <template v-if="!p.lang || p.lang === 'en'">
-                <div :lang="p.lang" mb8>
-                  <!-- Combined Title: Conference + Talk Title (Normal Sections) -->
-                  <h3 v-if="category.name !== 'Conferences and Fieldwork'" :id="`${getSlug(category.name)}-${getSlug(talk.title)}`" tabindex="-1" mb2 :lang="talk.lang" text-xl>
-                    <a v-if="p.conferenceUrl" :href="p.conferenceUrl" target="_blank" rel="noopener noreferrer" hover:underline>
-                      <span font-semibold>{{ p.conference }}:</span>
-                    </a>
-                    <span v-else font-semibold>{{ p.conference }}:</span>
-                    <span ml2 op80 font-normal>{{ talk.title }}</span>
-                    <span v-if="isFuture(p.date)" class="badge-upcoming ml2">Upcoming</span>
-                  </h3>
-
-                  <!-- Single Title (Fieldwork Section) -->
-                  <h3 v-else :id="`${getSlug(category.name)}-${getSlug(talk.title)}`" tabindex="-1" mb2 :lang="talk.lang" text-xl font-semibold>
-                    {{ talk.title }}
-                    <span v-if="isFuture(p.date)" class="badge-upcoming ml2">Upcoming</span>
-                  </h3>
-
-                  <!-- Date, Time, Institution & Location -->
-                  <div text-sm op70 space-y-1 mb6>
-                    <div flex="~ gap-2 items-baseline" font-mono text-xs>
-                      <span v-if="p.date" class="talk-date">{{ formatRange(p.date, p.endDate) }}</span>
-                      <span v-if="p.time" text-xs op70>at {{ p.time }}</span>
-                    </div>
-                    <div v-if="p.institution" font-semibold>
-                      {{ p.institution }}
-                    </div>
-                    <div v-if="p.location">
-                      {{ p.location }}
-                    </div>
-                    <div v-if="p.room" text-xs op50 mt2>
-                      {{ p.room }}
-                    </div>
-                  </div>
-
-                  <div v-if="talk.description" op75 mb6 :lang="talk.lang">
-                    {{ talk.description }}
-                  </div>
-
-                  <!-- Abstract -->
-                  <div v-if="p.abstract" class="talk-abstract mt6 mb6 p5 rounded-lg">
-                    <div text-sm leading-relaxed whitespace-pre-wrap op90 font-sans>
-                      {{ p.abstract }}
-                    </div>
-                  </div>
-
-                  <!-- Links -->
-                  <div flex="~ gap-4 wrap" mt5>
-                    <a
-                      v-if="p.pdf"
-                      :href="p.pdf"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      op60 hover:op100 transition-opacity duration-300
-                      flex="~ gap-2 items-center"
-                      text-sm font-500
-                    >
-                      <div i-ri-file-pdf-line class="text-lg" />
-                      Slides
-                    </a>
-                    <a
-                      v-if="p.recording"
-                      :href="p.recording"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      op60 hover:op100 transition-opacity duration-300
-                      flex="~ gap-2 items-center"
-                      text-sm font-500
-                    >
-                      <div i-ri-video-fill class="text-lg" />
-                      Recording
-                    </a>
-                    <a
-                      v-if="p.transcript"
-                      :href="p.transcript"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      op60 hover:op100 transition-opacity duration-300
-                      flex="~ gap-2 items-center"
-                      text-sm font-500
-                    >
-                      <div i-ri-file-text-line class="text-lg" />
-                      Transcript
-                    </a>
-                  </div>
-
-                  <div v-if="isFuture(p.date)" mt4 text-sm op70>
-                    In {{ daysLeft(p.date) }} days
-                  </div>
-                </div>
-              </template>
+    <Section
+      v-for="category, catIdx in categories"
+      :id="getSlug(category.name)"
+      :key="category.name"
+      :title="category.name"
+      :first="catIdx === 0"
+    >
+      <div v-for="talk in category.talks" :key="talk.title" class="talk">
+        <div v-for="p, presIdx in talk.presentations" :key="presIdx">
+          <h3 :id="`${getSlug(category.name)}-${getSlug(talk.title)}${presIdx ? `-${presIdx}` : ''}`" class="talk-title">
+            <template v-if="category.name !== 'Conferences and Fieldwork'">
+              <a v-if="p.conferenceUrl" :href="p.conferenceUrl" target="_blank" rel="noopener noreferrer">{{ p.conference }}</a>
+              <span v-else>{{ p.conference }}</span>:
+              {{ talk.title }}
             </template>
+            <template v-else>
+              <a v-if="p.conferenceUrl" :href="p.conferenceUrl" target="_blank" rel="noopener noreferrer">{{ talk.title }}</a>
+              <span v-else>{{ talk.title }}</span>
+            </template>
+            <Tag v-if="isFuture(p.date)" class="ml-2">
+              Upcoming
+            </Tag>
+          </h3>
+
+          <Meta :date="formatRange(p.date, p.endDate, p.time)" :venue="p.institution || p.location">
+            <span v-if="p.room">{{ p.room }}</span>
+          </Meta>
+
+          <p v-if="talk.description" class="talk-description">
+            {{ talk.description }}
+          </p>
+
+          <details v-if="p.abstract" class="talk-abstract">
+            <summary>Abstract</summary>
+            <p>{{ p.abstract }}</p>
+          </details>
+
+          <div v-if="p.pdf || p.recording || p.transcript" class="talk-links">
+            <Link v-if="p.pdf" :href="p.pdf" external>
+              Slides
+            </Link>
+            <Link v-if="p.recording" :href="p.recording" external>
+              Recording
+            </Link>
+            <Link v-if="p.transcript" :href="p.transcript" external>
+              Transcript
+            </Link>
           </div>
-        </template>
+        </div>
       </div>
-    </template>
+    </Section>
   </div>
 </template>
 
 <style scoped>
-.category-heading {
-  font-family:
-    'Space Grotesk',
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
-  letter-spacing: -0.015em;
+.talk + .talk {
+  margin-top: var(--s-8);
 }
 
-.talk-divider {
-  border-top-color: var(--c-border);
+.prose .talk-title {
+  margin: 0 0 var(--s-2);
+  font-size: var(--t-lg);
+  line-height: var(--lh-snug);
+  opacity: 1;
 }
 
-.badge-upcoming {
-  padding: 0.125rem 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  background-color: var(--c-accent-glow);
-  color: var(--c-accent);
-  border: 1px solid var(--c-border);
-  border-radius: 4px;
-}
-
-.talk-date {
-  color: var(--c-accent-warm);
+.talk-description {
+  margin: var(--s-3) 0 0;
+  color: var(--fg-muted);
 }
 
 .talk-abstract {
-  background-color: color-mix(in srgb, var(--c-bg) 85%, white);
-  border: 1px solid var(--c-border);
-  border-left: 3px solid var(--c-accent);
+  margin-top: var(--s-3);
 }
 
-html.dark .talk-abstract {
-  background-color: color-mix(in srgb, var(--c-bg) 80%, transparent);
+.talk-abstract summary {
+  cursor: pointer;
+  width: fit-content;
+  color: var(--fg-muted);
+  font-size: var(--t-sm);
+}
+
+.talk-abstract summary:hover {
+  color: var(--fg);
+}
+
+.talk-abstract p {
+  margin: var(--s-3) 0 0;
+  font-size: var(--t-sm);
+  white-space: pre-line;
+}
+
+.talk-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-5);
+  margin-top: var(--s-3);
+  font-size: var(--t-sm);
 }
 </style>

@@ -1,4 +1,5 @@
 <script setup lang='ts'>
+import { useHead } from '@unhead/vue'
 import { formatDate } from '~/logics'
 
 const { frontmatter } = defineProps({
@@ -9,13 +10,9 @@ const { frontmatter } = defineProps({
 })
 
 const router = useRouter()
-const route = useRoute()
 const content = ref<HTMLDivElement>()
 
 const base = 'https://oscarhickman.github.io'
-const tweetUrl = computed(() => `https://twitter.com/intent/tweet?text=${encodeURIComponent(`Reading @oscarhickman\'s ${base}${route.path}\n\nI think...`)}`)
-const elkUrl = computed(() => `https://elk.zone/intent/post?text=${encodeURIComponent(`Reading @oscarhickman\'s ${base}${route.path}\n\nI think...`)}`)
-const blueskyUrl = computed(() => `https://bsky.app/intent/compose?text=${encodeURIComponent(`Reading @oscarhickman ${base}${route.path}\n\nI think...`)}`)
 
 onMounted(() => {
   const navigate = () => {
@@ -75,24 +72,33 @@ onMounted(() => {
   }, 1)
 })
 
-const ArtComponent = computed(() => {
-  let art = frontmatter.art
-  if (art === 'random' || !art)
-    art = 'dots'
-  if (typeof window !== 'undefined') {
-    if (art === 'plum')
-      return defineAsyncComponent(() => import('./ArtPlum.vue'))
-    else if (art === 'dots')
-      return defineAsyncComponent(() => import('./ArtDots.vue'))
-  }
-  return undefined
-})
+if (frontmatter.date) {
+  useHead({
+    script: [
+      {
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          'headline': frontmatter.display || frontmatter.title,
+          'datePublished': frontmatter.date,
+          'author': {
+            '@type': 'Person',
+            'name': 'Oscar Hickman',
+            'url': base,
+          },
+          'publisher': {
+            '@type': 'Person',
+            'name': 'Oscar Hickman',
+          },
+        }),
+      },
+    ],
+  })
+}
 </script>
 
 <template>
-  <ClientOnly v-if="ArtComponent">
-    <component :is="ArtComponent" />
-  </ClientOnly>
   <div
     v-if="frontmatter.display ?? frontmatter.title"
     class="prose m-auto mb-8"
@@ -137,22 +143,4 @@ const ArtComponent = computed(() => {
   >
     <slot />
   </article>
-  <div v-if="route.path !== '/'" class="prose m-auto mt-8 mb-8 slide-enter animate-delay-500 print:hidden">
-    <template v-if="frontmatter.duration">
-      <span font-mono op50>> </span>
-      <span op50>comment on </span>
-      <a :href="blueskyUrl" target="_blank" op50>bluesky</a>
-      <span op25> / </span>
-      <a :href="elkUrl" target="_blank" op50>mastodon</a>
-      <span op25> / </span>
-      <a :href="tweetUrl" target="_blank" op50>twitter</a>
-    </template>
-    <br>
-    <span font-mono op50>> </span>
-    <RouterLink
-      :to="route.path.split('/').slice(0, -1).join('/') || '/'"
-      class="font-mono op50 hover:op75"
-      v-text="'cd ..'"
-    />
-  </div>
 </template>

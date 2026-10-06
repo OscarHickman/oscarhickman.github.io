@@ -7,126 +7,151 @@ function toTop() {
 }
 
 const { y: scroll } = useWindowScroll()
+
+const links = [
+  { to: '/papers', label: 'Papers' },
+  { to: '/talks', label: 'Talks' },
+  { to: '/projects', label: 'Projects' },
+  { to: '/photos', label: 'Photos' },
+]
+
+const socials = [
+  { href: 'https://github.com/OscarHickman', label: 'GitHub', icon: 'i-uil-github-alt' },
+  { href: 'https://www.linkedin.com/in/oscarhickman', label: 'LinkedIn', icon: 'i-ri-linkedin-line' },
+  { href: 'https://www.strava.com/athletes/36376289', label: 'Strava', icon: 'i-ri-run-line' },
+]
 </script>
 
 <template>
-  <header class="header z-40">
-    <div class="home-button absolute xl:fixed m-5 flex items-center gap-3">
-      <RouterLink
-        class="w-12 h-12 select-none outline-none"
-        to="/"
-        focusable="false"
-        title="Home"
-      >
-        <Logo />
+  <header class="site-header">
+    <RouterLink class="home-link" to="/" aria-label="Oscar Hickman, home">
+      <Logo />
+    </RouterLink>
+    <nav class="nav" aria-label="Main navigation">
+      <RouterLink v-for="link in links" :key="link.to" :to="link.to">
+        {{ link.label }}
       </RouterLink>
-    </div>
+      <a
+        v-for="s in socials"
+        :key="s.href"
+        :href="s.href"
+        target="_blank"
+        rel="noopener noreferrer"
+        :aria-label="s.label"
+        :title="s.label"
+        class="social"
+      >
+        <div :class="s.icon" />
+      </a>
+      <ToggleTheme />
+    </nav>
     <button
-      title="Scroll to top"
-      fixed right-3 bottom-3 w-10 h-10 hover:op100 rounded-full
-      hover-bg-hex-8883 transition duration-300 z-100 print:hidden
-      :class="scroll > 300 ? 'op30' : 'op0! pointer-events-none'"
+      type="button"
+      aria-label="Scroll to top"
+      class="to-top print:hidden"
+      :class="scroll > 300 ? 'op40' : 'op0! pointer-events-none'"
+      :tabindex="scroll > 300 ? 0 : -1"
+      :aria-hidden="scroll > 300 ? undefined : 'true'"
       @click="toTop()"
     >
       <div i-ri-arrow-up-line />
     </button>
-    <nav class="nav">
-      <div class="spacer" />
-      <div class="right" print:op0>
-        <RouterLink to="/papers" title="Papers">
-          <span class="lt-md:hidden">Papers</span>
-          <div i-ri-article-line class="md:hidden" />
-        </RouterLink>
-        <RouterLink to="/talks" title="Talks">
-          <span class="lt-md:hidden">Talks</span>
-          <div i-ri-presentation-line class="md:hidden" />
-        </RouterLink>
-        <RouterLink to="/projects" title="Projects">
-          <span class="lt-md:hidden">Projects</span>
-          <div i-ri-lightbulb-line class="md:hidden" />
-        </RouterLink>
-        <!-- Removed legacy sponsor/media/demo/chat/podcast links; simplified social navigation -->
-        <RouterLink to="/photos" title="Photos">
-          <div i-ri-camera-3-line />
-        </RouterLink>
-        <a href="https://github.com/OscarHickman" target="_blank" title="GitHub" class="lt-md:hidden">
-          <div i-uil-github-alt />
-        </a>
-        <a href="https://www.linkedin.com/in/oscarhickman" target="_blank" title="LinkedIn" class="lt-md:hidden">
-          <div i-ri-linkedin-line />
-        </a>
-        <a href="https://www.strava.com/athletes/36376289" target="_blank" title="Strava" class="lt-md:hidden">
-          <div i-ri-run-line />
-        </a>
-        <ToggleTheme />
-      </div>
-    </nav>
   </header>
 </template>
 
 <style scoped>
-.header {
-  border-bottom: 1px solid var(--c-border);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  background: color-mix(in srgb, var(--c-bg) 85%, transparent);
-  transition: border-color 0.3s ease;
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding: var(--s-5) var(--s-5);
 }
 
-.header h1 {
-  margin-bottom: 0;
-}
-
-.logo {
-  position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
+.home-link {
+  display: block;
+  width: var(--s-10);
+  height: var(--s-10);
+  flex-shrink: 0;
+  color: var(--fg);
 }
 
 .nav {
-  padding: 1.5rem 2rem;
-  width: 100%;
-  display: grid;
-  grid-template-columns: auto max-content;
-  box-sizing: border-box;
-  font-family:
-    'Space Grotesk',
-    -apple-system,
-    BlinkMacSystemFont,
-    sans-serif;
-  letter-spacing: 0.02em;
-}
-
-.nav > * {
-  margin: auto;
-}
-
-.nav img {
-  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  font-family: var(--font-display);
+  font-size: var(--t-base);
 }
 
 .nav a {
-  cursor: pointer;
+  color: var(--fg-muted);
   text-decoration: none;
-  color: inherit;
-  transition: all 0.2s ease;
-  opacity: 0.7;
-  outline: none;
+  transition: color var(--dur-fast) var(--ease);
 }
 
 .nav a:hover,
 .nav a.router-link-active {
-  opacity: 1;
-  color: var(--c-accent);
+  color: var(--fg);
 }
 
-.nav .right {
-  display: grid;
-  grid-gap: 1.5rem;
-  grid-auto-flow: column;
+.nav a.router-link-active {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.3em;
 }
 
-.nav .right > * {
-  margin: auto;
+.nav .social {
+  display: none;
+}
+
+.to-top {
+  position: fixed;
+  right: var(--s-3);
+  bottom: var(--s-3);
+  width: var(--s-10);
+  height: var(--s-10);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-full);
+  z-index: var(--z-sticky);
+  transition: opacity var(--dur-slow) var(--ease);
+}
+
+.to-top:hover {
+  opacity: 1 !important;
+  background: var(--bg-raised);
+}
+
+/* Smallest phones: tighten so four labels and the toggle still fit */
+@media (max-width: 374px) {
+  .site-header {
+    padding: var(--s-4);
+  }
+
+  .home-link {
+    width: var(--s-8);
+    height: var(--s-8);
+  }
+
+  .nav {
+    gap: var(--s-3);
+    font-size: var(--t-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  .site-header {
+    padding: var(--s-6) var(--s-8);
+  }
+
+  .nav {
+    gap: var(--s-6);
+  }
+
+  .nav .social {
+    display: inline-flex;
+  }
 }
 </style>

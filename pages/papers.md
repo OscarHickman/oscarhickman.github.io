@@ -1,8 +1,7 @@
 ---
 title: Papers - Oscar Hickman
 display: Papers
-description: Research publications, preprints, and manuscripts
-art: dots
+description: Papers by Oscar Hickman.
 ---
 
 <ListPublications />

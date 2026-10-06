@@ -1,4 +1,5 @@
 import { Buffer } from 'node:buffer'
+import { createHash } from 'node:crypto'
 import { basename, dirname, resolve } from 'node:path'
 import MarkdownItShiki from '@shikijs/markdown-it'
 import { transformerNotationDiff, transformerNotationHighlight, transformerNotationWordHighlight } from '@shikijs/transformers'
@@ -28,6 +29,10 @@ import SVG from 'vite-svg-loader'
 import { slugify } from './scripts/slugify'
 
 const promises: Promise<any>[] = []
+
+const ogSVg = fs.readFileSync('./scripts/og-template.svg', 'utf-8')
+// Generated images are cached on disk, so key them by template to regenerate when it changes
+const ogVersion = createHash('sha256').update(ogSVg).digest('hex').slice(0, 8)
 
 export default defineConfig({
   // For GitHub Pages: user/org sites (username.github.io) are served at root; no base path needed.
@@ -127,14 +132,7 @@ export default defineConfig({
         md.use(MarkdownItMagicLink, {
           linksMap: {
           },
-          imageOverrides: [
-            ['https://github.com/vuejs/core', 'https://vuejs.org/logo.svg'],
-            ['https://github.com/nuxt/nuxt', 'https://nuxt.com/assets/design-kit/icon-green.svg'],
-            ['https://github.com/vitejs/vite', 'https://vitejs.dev/logo.svg'],
-            ['https://nuxtlabs.com', 'https://github.com/nuxtlabs.png'],
-            [/opencollective\.com\/vite/, 'https://github.com/vitejs.png'],
-            [/opencollective\.com\/elk/, 'https://github.com/elk-zone.png'],
-          ],
+          imageOverrides: [],
         })
 
         md.use(GitHubAlerts)
@@ -152,12 +150,15 @@ export default defineConfig({
 
           const route = basename(id, '.md')
 
-          if (route !== 'index' && !frontmatter.image && frontmatter.title) {
-            const path = `og/${route}.png`
+          if (!frontmatter.image && frontmatter.title) {
+            const path = `og/${ogVersion}/${route}.png`
+            const subtitle = route === 'index'
+              ? 'Institute for Computational Cosmology, Durham University'
+              : 'Oscar Hickman'
             promises.push(
               fs.existsSync(`${id.slice(0, -3)}.png`)
                 ? fs.copy(`${id.slice(0, -3)}.png`, `public/${path}`)
-                : generateOg(frontmatter.title!.replace(/\s-\s.*$/, '').trim(), `public/${path}`),
+                : generateOg(frontmatter.title!.replace(/\s-\s.*$/, '').trim(), subtitle, `public/${path}`),
             )
             frontmatter.image = `${hostBase}/${path}`
           }
@@ -258,27 +259,27 @@ export default defineConfig({
   },
 })
 
-const ogSVg = fs.readFileSync('./scripts/og-template.svg', 'utf-8')
+function escapeXml(text: string) {
+  return text.replace(/[<>&'"]/g, c => `&#${c.charCodeAt(0)};`)
+}
 
-async function generateOg(title: string, output: string) {
-  if (fs.existsSync(output))
-    return
-
+// Always regenerate (it's cheap) so a changed title or subtitle never ships a stale card
+async function generateOg(title: string, subtitle: string, output: string) {
   await fs.mkdir(dirname(output), { recursive: true })
   // breakline every 30 chars
   const lines = title.trim().split(/(.{0,30})(?:\s|$)/g).filter(Boolean)
 
   const data: Record<string, string> = {
-    line1: lines[0],
-    line2: lines[1],
-    line3: lines[2],
+    line1: escapeXml(lines[0] || ''),
+    line2: escapeXml(lines[1] || ''),
+    subtitle: escapeXml(subtitle),
   }
   const svg = ogSVg.replace(/\{\{([^}]+)\}\}/g, (_, name) => data[name] || '')
 
   console.log(`Generating ${output}`)
   try {
     await sharp(Buffer.from(svg))
-      .resize(1200 * 1.1, 630 * 1.1)
+      .resize(1200, 630)
       .png()
       .toFile(output)
   }

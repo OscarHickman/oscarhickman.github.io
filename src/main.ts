@@ -16,9 +16,10 @@ import 'markdown-it-github-alerts/styles/github-colors-dark-class.css'
 import 'markdown-it-github-alerts/styles/github-base.css'
 import '@shikijs/twoslash/style-rich.css'
 import 'shiki-magic-move/style.css'
-import './styles/main.css'
+import './styles/tokens.css'
+import './styles/base.css'
 import './styles/prose.css'
-import './styles/markdown.css'
+import './styles/vendor.css'
 import 'uno.css'
 
 export const createApp = ViteSSG(
