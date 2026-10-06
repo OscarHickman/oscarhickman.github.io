@@ -116,8 +116,9 @@ onKeyStroke('Escape', (e) => {
   >
     Skip to main content
   </a>
+  <CosmicWeb :hero="route.path === '/'" />
   <NavBar />
-  <main id="main-content" class="px-7 py-10 of-x-hidden" tabindex="-1">
+  <main id="main-content" class="px-5 sm:px-7 pt-6 pb-10 md:pt-10 of-x-hidden" tabindex="-1">
     <RouterView />
     <Footer :key="route.path" />
   </main>
@@ -154,6 +155,7 @@ onKeyStroke('Escape', (e) => {
           type="button"
           class="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition z-10"
           title="Previous photo (Left Arrow)"
+          aria-label="Previous photo"
           @click.stop="prevPhoto()"
         >
           <div i-ri-arrow-left-s-line class="text-3xl" />
@@ -171,6 +173,7 @@ onKeyStroke('Escape', (e) => {
           type="button"
           class="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition z-10"
           title="Next photo (Right Arrow)"
+          aria-label="Next photo"
           @click.stop="nextPhoto()"
         >
           <div i-ri-arrow-right-s-line class="text-3xl" />
