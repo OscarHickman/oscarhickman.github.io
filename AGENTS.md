@@ -79,8 +79,7 @@ oscarhickman.io/
 │   │   ├── ListProjects.vue  # Grid of project cards
 │   │   ├── ListPublications.vue # Academic publications & preprints
 │   │   ├── WrapperPost.vue   # Layout wrapper for markdown posts
-│   │   ├── ArtPlum.vue       # Procedural art component (simplex noise)
-│   │   ├── ArtDots.vue       # Procedural dot pattern
+│   │   ├── CosmicWeb.vue     # WebGL Zel'dovich cosmic-web background (mounted once in App.vue)
 │   │   ├── YouTubeEmbed.vue  # Embeds YouTube videos
 │   │   ├── TalkDate.vue      # Talk date formatting
 │   │   ├── TextCopy.vue      # Copy-to-clipboard text
@@ -96,12 +95,12 @@ oscarhickman.io/
 │   │   ├── prose.css         # Markdown prose styling
 │   │   └── markdown.css      # Markdown-specific overrides
 │   └── data/                 # Data files (TypeScript)
-│       ├── projects.ts       # Export projectCategories with GitHub projects
+│       ├── projects.ts       # Public projects only (currently empty → "Coming soon.")
 │       ├── publications.ts   # Export publications[] array
 │       └── talks.ts          # Export talks[] array
 ├── pages/                    # File-based routing (Vue Router auto)
 │   ├── index.md              # Home page (hero section)
-│   ├── projects.md           # Portfolio of 18 GitHub projects (6 categories)
+│   ├── projects.md           # Projects page (shows "Coming soon." while empty)
 │   ├── publications.md       # Academic publications list
 │   ├── talks.md              # Talks and presentations
 │   ├── papers.md             # Papers & publications (alt page)
@@ -173,25 +172,12 @@ interface ProjectItem {
   name: string
   link: string
   desc: string
-  icon: string
-  tags?: string[]
 }
 
-interface ProjectCategory {
-  name: string
-  projects: ProjectItem[]
-}
-
-export const projectCategories: ProjectCategory[] = [
-  { name: 'ML for Cosmology & Physics', projects: [/* ... */] },
-  { name: 'Software & Applications', projects: [/* ... */] },
-  { name: 'Hardware & Assembly', projects: [/* ... */] },
-  { name: 'Academic & Publications', projects: [/* ... */] },
-  { name: 'Web & Personal', projects: [/* ... */] },
-]
+export const projects: ProjectItem[] = []
 ```
 
-Populated with **18 GitHub projects** across 5 categories, each with name, GitHub link, description, Carbon icon, and optional tags (language, domain, type).
+**Only list repositories that are public.** Most research code is private; private repos must not be named or linked anywhere on the site (including `_dist_redirects`). The home page describes research interests in general terms instead.
 
 ### Publications (src/data/publications.ts)
 
@@ -281,7 +267,6 @@ Each photo has optional `.json` metadata file with caption & blurhash for lazy l
 title: Page Title
 description: Meta description
 image: /og/page-slug.png # Auto-generated or custom
-art: random|dots|plum # Background art component
 display: Display Name
 lang: en
 date: YYYY-MM-DD
@@ -345,7 +330,7 @@ date: YYYY-MM-DD
 
 - **Unplugin Icons**: on-demand icon loading (Iconify sets)
 - **SVG loader**: inline SVG rendering
-- **Procedural art**: custom noise-based components (ArtPlum, ArtDots)
+- **Cosmic web background**: `CosmicWeb.vue` renders a 2D Zel'dovich-approximation realisation (maths in `src/logics/cosmic-web.ts`, tested in `tests/cosmic-web.test.ts`) with WebGL; full strength on `/`, dimmed elsewhere
 - **Physics demo**: Matter.js interactive simulator
 
 ## Deployment & Hosting
@@ -378,12 +363,7 @@ date: YYYY-MM-DD
 ## Content Organization
 
 - **Home**: intro + contact info
-- **Projects**: comprehensive portfolio of 18 GitHub projects across 5 categories:
-  - ML for Cosmology & Physics (6 projects)
-  - Software & Applications (5 projects)
-  - Hardware & Assembly (2 projects)
-  - Academic & Publications (3 projects)
-  - Web & Personal (2 projects)
+- **Projects**: public projects only; currently "Coming soon."
 - **Publications**: will list arxiv/DOI papers (currently empty placeholder)
 - **Talks**: presentations with dates, locations, recordings (currently empty placeholder)
 - **Papers**: alt view for publications
@@ -468,7 +448,7 @@ The build process regenerates OG images and all static output, so only source ne
 
 ### Future Expansion
 
-- [x] **Projects section** — fully populated with 18 GitHub projects across 5 categories
+- [ ] **Projects section** — add public repositories to `src/data/projects.ts` as they are released
 - [ ] Populate publications array with arxiv/DOI entries (add to `src/data/publications.ts`)
 - [ ] Add talks with presentation metadata (add to `src/data/talks.ts`)
 - [ ] Expand notes section with cosmology/ML insights (add blog posts to `pages/notes/`)
@@ -483,7 +463,7 @@ Before merging any pull request or declaring a frontend milestone complete, veri
 
 1. **Tokens Only:** No raw hex codes (`#xxxxxx`), raw `px`, or raw `ms` in `src/components/**` or `pages/**`. Everything must resolve against `--bg`, `--fg`, `--border`, `--accent`, `--spec-*`, `--s-*`, `--dur-*`, `--ease`.
 2. **Focus State Present:** Every interactive control (links, buttons, inputs) must have a visible `:focus-visible` ring using `var(--focus)`. Never set `outline: none` without providing an accessible alternative.
-3. **Reduced Motion Honoured:** All dynamic animations and procedural canvas loops (such as `ArtDots.vue`) must check `prefers-reduced-motion: reduce` and pause execution when `document.hidden` is true.
+3. **Reduced Motion Honoured:** All dynamic animations and procedural canvas loops (such as `CosmicWeb.vue`) must check `prefers-reduced-motion: reduce` and pause execution when `document.hidden` is true.
 4. **Contrast Hardened:** Normal text must meet WCAG AA contrast (≥ 4.5:1), and UI controls/large text must meet (≥ 3:1) in both light and dark modes.
 5. **Empirical Verification:** Run `pnpm lint`, `pnpm test`, and `pnpm build` with zero errors. Run axe-core accessibility evaluations on rendered routes.
 
