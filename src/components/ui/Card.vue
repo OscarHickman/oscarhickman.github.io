@@ -26,23 +26,13 @@ defineProps<{
   padding: var(--s-5);
   border-radius: var(--r-md);
   border: 1px solid var(--border);
-  background: color-mix(in srgb, var(--bg) 75%, transparent);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  transition: all var(--dur-slow) var(--ease);
+  background: var(--bg);
+  transition: border-color var(--dur-fast) var(--ease);
   text-decoration: none;
   color: inherit;
 }
 
 .card-root:hover {
-  border-color: var(--accent);
-  box-shadow:
-    var(--e-glow),
-    0 0 0 1px var(--accent);
-  transform: translateY(-2px);
-}
-
-.card-root:active {
-  transform: translateY(0);
+  border-color: var(--border-strong);
 }
 </style>

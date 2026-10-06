@@ -8,37 +8,33 @@ defineProps<{
 
 <template>
   <div class="meta-root">
-    <span v-if="date" class="meta-item meta-date">
-      {{ date }}
-    </span>
-    <span v-if="date && (venue || id)" class="meta-dot">·</span>
-    <span v-if="venue" class="meta-item meta-venue">
-      {{ venue }}
-    </span>
-    <span v-if="venue && id" class="meta-dot">·</span>
-    <span v-if="id" class="meta-item meta-id">
-      {{ id }}
-    </span>
+    <span v-if="date" class="meta-item">{{ date }}</span>
+    <span v-if="venue" class="meta-item">{{ venue }}</span>
+    <span v-if="id" class="meta-item">{{ id }}</span>
     <slot />
   </div>
 </template>
 
 <style scoped>
 .meta-root {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--s-2);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--s-3);
+  row-gap: var(--s-1);
   font-family: var(--font-mono);
   font-size: var(--t-xs);
   color: var(--fg-muted);
   letter-spacing: var(--ls-wide);
 }
 
-.meta-date {
-  color: var(--spec-k);
+.meta-root > :first-child {
+  white-space: nowrap;
 }
 
-.meta-dot {
+.meta-root > * + *::before {
+  content: '·';
+  margin-right: var(--s-3);
   opacity: 0.5;
 }
 </style>

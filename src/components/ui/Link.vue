@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-const props = defineProps<{
+// `undefined` default stops Vue casting a missing boolean prop to `false`
+const props = withDefaults(defineProps<{
   href: string
   external?: boolean
-}>()
+}>(), {
+  external: undefined,
+})
 
 const isExternal = computed(() => {
   if (typeof props.external === 'boolean')
@@ -51,12 +54,10 @@ const isExternal = computed(() => {
 
 .external-arrow {
   font-size: 0.85em;
-  opacity: 0.7;
-  transition: transform var(--dur-fast) var(--ease);
+  opacity: 0.6;
 }
 
 .link-root:hover .external-arrow {
   opacity: 1;
-  transform: translate(1px, -1px);
 }
 </style>

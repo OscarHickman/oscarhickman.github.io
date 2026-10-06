@@ -58,10 +58,15 @@
   opacity: 0.5;
 }
 
+.prose p {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
 /* Headings */
 .prose h1 {
   color: var(--fg-deeper);
-  font-weight: 800;
+  font-weight: 600;
   font-size: var(--t-4xl);
   margin-top: 0;
   margin-bottom: 0.8888889em;
@@ -71,7 +76,7 @@
 
 .prose h2 {
   color: var(--fg-deep);
-  font-weight: 700;
+  font-weight: 600;
   font-size: var(--t-2xl);
   margin-top: 2em;
   margin-bottom: 1em;
@@ -380,7 +385,7 @@ h4:focus .header-anchor {
   transform: translateY(3px);
   line-height: 100%;
   color: var(--fg-light) !important;
-  --uno: gap-1 transition rounded px1.5 py1 important-border-0 font-condensed;
+  --uno: gap-1 transition rounded px1.5 py1 important-border-0 font-mono;
 }
 
 .markdown-magic-link:hover {

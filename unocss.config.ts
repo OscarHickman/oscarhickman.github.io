@@ -76,11 +76,7 @@ export default defineConfig({
     presetWind3(),
     presetWebFonts({
       fonts: {
-        sans: 'Inter',
         mono: 'DM Mono',
-        condensed: 'Roboto Condensed',
-        wisper: 'Bad Script',
-        display: 'Space Grotesk:400,500,600,700',
         serif: 'STIX Two Text:400,500,600,700',
       },
       processors: createLocalFontProcessor(),

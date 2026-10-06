@@ -23,17 +23,13 @@ describe('uI Primitives', () => {
     expect(wrapper.text()).toContain('Card body content')
   })
 
-  it('renders Tag.vue with spectral color custom property', () => {
+  it('renders Tag.vue with its label', () => {
     const wrapper = mount(Tag, {
-      props: {
-        spectral: 'b',
-      },
       slots: {
         default: 'Cosmology',
       },
     })
     expect(wrapper.classes()).toContain('tag-root')
-    expect(wrapper.attributes('style')).toContain('--tag-color: var(--spec-b)')
     expect(wrapper.text()).toBe('Cosmology')
   })
 
@@ -57,6 +53,21 @@ describe('uI Primitives', () => {
     expect(wrapper.find('.external-arrow').exists()).toBe(true)
   })
 
+  it('treats absolute URLs as external when external is not set', () => {
+    const wrapper = mount(Link, {
+      props: {
+        href: 'https://github.com',
+      },
+      global: {
+        stubs: {
+          RouterLink: true,
+        },
+      },
+    })
+    expect(wrapper.element.tagName).toBe('A')
+    expect(wrapper.attributes('target')).toBe('_blank')
+  })
+
   it('renders Meta.vue with date and venue', () => {
     const wrapper = mount(Meta, {
       props: {
@@ -69,18 +80,18 @@ describe('uI Primitives', () => {
     expect(wrapper.text()).toContain('Durham University')
   })
 
-  it('renders Section.vue with title and spectral gradient rule', () => {
+  it('renders Section.vue with a heading and its content', () => {
     const wrapper = mount(Section, {
       props: {
         title: 'Machine Learning',
-        spectral: 'k',
+        id: 'ml',
       },
       slots: {
         default: 'Section content',
       },
     })
-    expect(wrapper.find('.section-title').text()).toBe('Machine Learning')
-    expect(wrapper.find('.section-line').attributes('style')).toContain('var(--spec-k)')
+    expect(wrapper.find('h2.section-title').text()).toBe('Machine Learning')
+    expect(wrapper.attributes('id')).toBe('ml')
     expect(wrapper.text()).toContain('Section content')
   })
 })
