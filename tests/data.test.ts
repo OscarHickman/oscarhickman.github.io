@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import photos from '../photos/data'
 import { projects } from '../src/data/projects'
-import { publications } from '../src/data/publications'
+import { publications, venueLabel } from '../src/data/publications'
 
 describe('projects data', () => {
   it('only lists public https links', () => {
@@ -21,6 +21,15 @@ describe('publications data', () => {
       if (pub.arxiv)
         expect(pub.arxiv).toMatch(/^\d{4}\.\d{4,5}$/)
     }
+  })
+
+  it('prefixes the venue with the submission status until published', () => {
+    const base = { title: 't', authors: 'a', year: 2026, venue: 'MNRAS' }
+
+    expect(venueLabel({ ...base, status: 'submitted' })).toBe('Submitted to MNRAS')
+    expect(venueLabel({ ...base, status: 'accepted' })).toBe('Accepted by MNRAS')
+    expect(venueLabel(base)).toBe('MNRAS')
+    expect(venueLabel({ ...base, venue: undefined, status: 'submitted' })).toBeUndefined()
   })
 })
 

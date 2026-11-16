@@ -11,18 +11,13 @@ description: PhD researcher in cosmology at the Institute for Computational Cosm
   </p>
 </div>
 
-I work on statistical and machine-learning methods for cosmology, using simulations and galaxy surveys to study how galaxies form and how they trace the large-scale structure of the Universe.
+I'm a second-year PhD student in Durham. Most of my time goes on GALFORM, Durham's semi-analytic model of galaxy formation: running it on merger trees from N-body simulations and trying to get it to reproduce how real galaxies cluster.
 
-Before my PhD I worked as a quantitative developer. Outside research I'm a mediocre triathlete, a Cuban salsa dancer and an occasional sailor.
+My [first paper](/papers) shows that you can measure that clustering from a small fraction of the merger trees, which makes it cheap enough to calibrate the model against. The next step is doing that calibration, and comparing with DESI.
 
-<Section title="Research interests">
-  <ul>
-    <li>Simulation-based inference, and checking that its posteriors are well calibrated</li>
-    <li>Field-level inference from maps of the CMB and the galaxy distribution</li>
-    <li>Galaxy clustering, and how galaxies occupy dark matter haloes</li>
-    <li>Calibrating semi-analytic models of galaxy formation</li>
-  </ul>
-</Section>
+I also work on simulation-based inference, mainly on whether the posteriors it gives can be trusted, and on field-level inference from maps of CMB lensing and the galaxy distribution.
+
+Before the PhD I worked as a quantitative developer. Outside research I'm a mediocre triathlete, a Cuban salsa dancer and an occasional sailor.
 
 <Section title="Contact">
   <p>

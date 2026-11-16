@@ -12,7 +12,6 @@ const links = [
   { to: '/papers', label: 'Papers' },
   { to: '/talks', label: 'Talks' },
   { to: '/projects', label: 'Projects' },
-  { to: '/photos', label: 'Photos' },
 ]
 
 const socials = [
@@ -124,7 +123,7 @@ const socials = [
   background: var(--bg-raised);
 }
 
-/* Smallest phones: tighten so four labels and the toggle still fit */
+/* Smallest phones: tighten so the labels and the toggle still fit */
 @media (max-width: 374px) {
   .site-header {
     padding: var(--s-4);

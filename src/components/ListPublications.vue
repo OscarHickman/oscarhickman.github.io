@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useHead } from '@unhead/vue'
-import { publications } from '~/data/publications'
+import { publications, venueLabel } from '~/data/publications'
 
 const copiedTitle = ref<string | null>(null)
 const expandedBibtex = ref<string | null>(null)
@@ -58,7 +58,9 @@ if (publications.length) {
               'name': a.trim(),
             })),
             'datePublished': String(p.year),
-            ...(p.venue ? { publication: { '@type': 'Periodical', 'name': p.venue } } : {}),
+            // Only claim a journal once published; before that, record the status
+            ...(p.venue && !p.status ? { publication: { '@type': 'Periodical', 'name': p.venue } } : {}),
+            ...(p.venue && p.status ? { creativeWorkStatus: venueLabel(p) } : {}),
             ...(p.arxiv ? { sameAs: `https://arxiv.org/abs/${p.arxiv}` } : {}),
             ...(p.doi ? { identifier: p.doi } : {}),
           })),
@@ -108,7 +110,7 @@ if (publications.length) {
 
             <div class="mt-2.5 flex flex-wrap items-center gap-2">
               <Meta
-                :venue="p.venue"
+                :venue="venueLabel(p)"
               />
               <Link
                 v-if="p.arxiv"
